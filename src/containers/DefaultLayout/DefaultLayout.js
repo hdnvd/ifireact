@@ -67,7 +67,7 @@ class DefaultLayout extends Component {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from="/" to="/itsap/servicetype/list" />
+                  <Redirect from="/" to="/login" />
                 </Switch>
               </Suspense>
             </Container>

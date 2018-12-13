@@ -190,4 +190,11 @@ routes.push({ path: '/ifi/programmaketypes',exact:true, name: 'لیست اطلا
 const ifi_programmaketypeManage = React.lazy(() => import('./modules/ifi/pages/programmaketype/ifi_programmaketypeManage'));
 routes.push({ path: '/ifi/programmaketypes/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_programmaketypeManage});
 routes.push({ path: '/ifi/programmaketypes/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_programmaketypeManage});
+
+const ifi_dfnList = React.lazy(() => import('./modules/ifi/pages/dfn/ifi_dfnList'));
+routes.push({ path: '/ifi/dfns',exact:true, name: 'لیست اطلاعات',component:ifi_dfnList});
+const ifi_dfnManage = React.lazy(() => import('./modules/ifi/pages/dfn/ifi_dfnManage'));
+routes.push({ path: '/ifi/dfns/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_dfnManage});
+routes.push({ path: '/ifi/dfns/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_dfnManage});
+
 export default routes;
