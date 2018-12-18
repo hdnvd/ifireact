@@ -197,4 +197,11 @@ const ifi_dfnManage = React.lazy(() => import('./modules/ifi/pages/dfn/ifi_dfnMa
 routes.push({ path: '/ifi/dfns/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_dfnManage});
 routes.push({ path: '/ifi/dfns/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_dfnManage});
 
+
+const ifi_personelList = React.lazy(() => import('./modules/ifi/pages/personel/ifi_personelList'));
+routes.push({ path: '/ifi/personels',exact:true, name: 'لیست اطلاعات',component:ifi_personelList});
+const ifi_personelManage = React.lazy(() => import('./modules/ifi/pages/personel/ifi_personelManage'));
+routes.push({ path: '/ifi/personels/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_personelManage});
+routes.push({ path: '/ifi/personels/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_personelManage});
+
 export default routes;

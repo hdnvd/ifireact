@@ -1,197 +1,12 @@
 export default {
   items: [
       {
-          name: 'جداول تست',
+          name: 'فیلدهای انتخابی',
           icon: 'icon-list',
           badge: {
               variant: 'info',
           },
-          children: [{
-              name: 'ServiceType',
-              url: '/itsap/servicetypes/',
-              icon: 'icon-list',
-              badge: {
-                  variant: 'info',
-              },
-          },
-              {
-                  name: 'ServiceTypeGroups',
-                  url: '/itsap/servicetypegroups/',
-                  icon: 'icon-list',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-          ],
-      },
-      {
-          name: 'اطلاعات جداول اولیه',
-          icon: 'icon-list',
-          badge: {
-              variant: 'info',
-          },
-          children:[
-              {
-                  name: 'ABH',
-                  url: '/list/ABH',
-                  icon: 'icon-list',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'ABH2',
-                  url: '/list/ABH2',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'B28TOKOL',
-                  url: '/list/B28TOKOL',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'BAR(براورد)',
-                  url: '/list/BAR',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'BAX',
-                  url: '/list/BAX',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'BHA',
-                  url: '/list/BHA',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'BTMP',
-                  url: '/list/BTMP',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'EXP',
-                  url: '/list/EXP',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'EXPNEW',
-                  url: '/list/EXPNEW',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'FIX',
-                  url: '/list/FIX',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'MAR(مرکز هزینه)',
-                  url: '/list/MAR',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'MBAN',
-                  url: '/list/MBAN',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'PER(پرسنل)',
-                  url: '/list/PER',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'PREP',
-                  url: '/list/PREP',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'PSANAD',
-                  url: '/list/PSANAD',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'PTMP',
-                  url: '/list/PTMP',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'SANAD',
-                  url: '/list/SANAD',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'SAR',
-                  url: '/list/SAR',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'USER',
-                  url: '/list/USER',
-                  icon: 'icon-user-female',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'VAM',
-                  url: '/list/VAM',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-          ],
+          url: '/ifi/dfns',
       },
       {
           name: 'اطلاعات پایه',
@@ -202,7 +17,7 @@ export default {
           children:[
               {
                   name: 'اطلاعات کلی پرسنل',
-                  url: '/list/Empty',
+                  url: '/ifi/personels',
                   icon: 'icon-speedometer',
                   badge: {
                       variant: 'info',
@@ -592,9 +407,179 @@ export default {
               },
           ],
       },
+
+      {
+          name: 'اطلاعات جداول اولیه',
+          icon: 'icon-list',
+          badge: {
+              variant: 'info',
+          },
+          children:[
+              {
+                  name: 'ABH',
+                  url: '/list/ABH',
+                  icon: 'icon-list',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'ABH2',
+                  url: '/list/ABH2',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'B28TOKOL',
+                  url: '/list/B28TOKOL',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'BAR(براورد)',
+                  url: '/list/BAR',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'BAX',
+                  url: '/list/BAX',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'BHA',
+                  url: '/list/BHA',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'BTMP',
+                  url: '/list/BTMP',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'EXP',
+                  url: '/list/EXP',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'EXPNEW',
+                  url: '/list/EXPNEW',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'FIX',
+                  url: '/list/FIX',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'MAR(مرکز هزینه)',
+                  url: '/list/MAR',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'MBAN',
+                  url: '/list/MBAN',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'PER(پرسنل)',
+                  url: '/list/PER',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'PREP',
+                  url: '/list/PREP',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'PSANAD',
+                  url: '/list/PSANAD',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'PTMP',
+                  url: '/list/PTMP',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'SANAD',
+                  url: '/list/SANAD',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'SAR',
+                  url: '/list/SAR',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'USER',
+                  url: '/list/USER',
+                  icon: 'icon-user-female',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+              {
+                  name: 'VAM',
+                  url: '/list/VAM',
+                  icon: 'icon-speedometer',
+                  badge: {
+                      variant: 'info',
+                  },
+              },
+          ],
+      },
       {
           name: 'خروج',
-          url: '/list/Empty',
+          url: '/login',
           icon: 'icon-speedometer',
           badge: {
               variant: 'info',

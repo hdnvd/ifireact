@@ -10,7 +10,8 @@ function SweetTable(props){
             noDataText={'هیچ داده ای وجود ندارد'}
             pageText={'صفحه'}
             ofText={'از'}
-            rowsText={'سطر'}
+            rowsText={null}
+            showPageSizeOptions={false}
             pageJumpText={'برو به صفحه'}
             rowsSelectorText={'سطر در صفحه'}
             previousText={'ضفحه قبل'}

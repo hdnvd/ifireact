@@ -18,7 +18,7 @@ import {
     Row
 } from 'reactstrap';
 import Constants from "../../../classes/Constants";
-import IfiFetcher from "../../../classes/ifi-fetcher";
+import SweetFetcher from "../../../classes/sweet-fetcher";
 
 class Login extends Component {
     constructor(props) {
@@ -72,11 +72,12 @@ class Login extends Component {
                                                         data.append('password', this.state.password);
                                                         data.append('forceLogin', true);
                                                         data.append('appName', 'Panel');
-                                                        new IfiFetcher().Fetch('/USERs/login', 'post', data, data => {
+                                                        new SweetFetcher().Fetch('/USERs/login', 'post', data, data => {
                                                             console.log(data);
                                                             let cookies = new Cookies();
-                                                            cookies.set('sessionkey', data.SessionKey);
-                                                            if (data.SessionKey.length > 2)
+                                                            cookies.set(data);
+                                                            cookies.set('sessionkey', data.Data.sessionkey);
+                                                            if (data.Data.sessionkey.length > 2)
                                                                 this.props.history.push('/ifi/dfns');
                                                             else
                                                                 alert("اطلاعات کاربری صحیح نمی باشد.");
