@@ -282,7 +282,7 @@ new SweetFetcher().Fetch('/dfn?pid=33','get',null,
 		if(id!==''){
 		method='put';
 		action=AccessManager.EDIT;
-		data.append('id', id);
+		data.append('personelid', id);
 	}
                                     new SweetFetcher().Fetch('/personel/'+id,method,data, 
                                     res => {
