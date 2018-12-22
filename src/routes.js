@@ -4,13 +4,6 @@ import DefaultLayout from './containers/DefaultLayout';
 
 const Breadcrumbs = React.lazy(() => import('./views/Base/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/Base/Cards'));
-const EditOne = React.lazy(() => import('./pages/EditOne'));
-const EditGlobal = React.lazy(() => import('./pages/EditGlobal'));
-const ListOne = React.lazy(() => import('./pages/ListOne'));
-const ListGlobal = React.lazy(() => import('./pages/ListGlobal'));
-const itsap_servicetypeList = React.lazy(() => import('./modules/itsap/pages/servicetype/itsap_servicetypeList'));
-const itsap_servicetypegroupList = React.lazy(() => import('./pages/itsap_servicetypegroupList'));
-const itsap_servicetypegroupManage = React.lazy(() => import('./pages/itsap_servicetypegroupManage'));
 const Carousels = React.lazy(() => import('./views/Base/Carousels'));
 const Collapses = React.lazy(() => import('./views/Base/Collapses'));
 const Dropdowns = React.lazy(() => import('./views/Base/Dropdowns'));
@@ -44,21 +37,11 @@ const Typography = React.lazy(() => import('./views/Theme/Typography'));
 const Widgets = React.lazy(() => import('./views/Widgets/Widgets'));
 const Users = React.lazy(() => import('./views/Users/Users'));
 const User = React.lazy(() => import('./views/Users/User'));
-const itsap_servicetypeManage = React.lazy(() => import('./modules/itsap/pages/servicetype/itsap_servicetypeManage'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', exact: true, name: 'صفحه اصلی', component: DefaultLayout, },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/list/:id',exact:false, name: 'لیست اطلاعات',component:ListGlobal},
-
-    { path: '/itsap/servicetypes',exact:true, name: 'لیست اطلاعات',component:itsap_servicetypeList},
-    { path: '/itsap/servicetypes/management/:id',exact:false, name: 'مدیریت اطلاعات',component:itsap_servicetypeManage},
-    { path: '/itsap/servicetypegroups',exact:true, name: 'لیست اطلاعات',component:itsap_servicetypegroupList},
-    { path: '/itsap/servicetypegroups/management/:id',exact:false, name: 'مدیریت اطلاعات',component:itsap_servicetypegroupManage},
-  { path: '/edit/:id',exact:false, name: 'ویرایش اطلاعات', component:EditGlobal },
-  { path: '/listper',exact:false, name: 'ListPer', component:ListOne },
-  { path: '/editper',exact:false, name: 'EditPer', component:EditOne },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
@@ -99,109 +82,17 @@ const routes = [
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
 ];
-
-
-const ifi_activityList = React.lazy(() => import('./modules/ifi/pages/activity/ifi_activityList'));
-routes.push({ path: '/ifi/activitys',exact:true, name: 'لیست اطلاعات',component:ifi_activityList});
-const ifi_activityManage = React.lazy(() => import('./modules/ifi/pages/activity/ifi_activityManage'));
-routes.push({ path: '/ifi/activitys/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_activityManage});
-routes.push({ path: '/ifi/activitys/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_activityManage});
-
-
-const ifi_bankList = React.lazy(() => import('./modules/ifi/pages/bank/ifi_bankList'));
-routes.push({ path: '/ifi/banks',exact:true, name: 'لیست اطلاعات',component:ifi_bankList});
-const ifi_bankManage = React.lazy(() => import('./modules/ifi/pages/bank/ifi_bankManage'));
-routes.push({ path: '/ifi/banks/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_bankManage});
-routes.push({ path: '/ifi/banks/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_bankManage});
-
-
-const ifi_classList = React.lazy(() => import('./modules/ifi/pages/class/ifi_classList'));
-routes.push({ path: '/ifi/classs',exact:true, name: 'لیست اطلاعات',component:ifi_classList});
-const ifi_classManage = React.lazy(() => import('./modules/ifi/pages/class/ifi_classManage'));
-routes.push({ path: '/ifi/classs/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_classManage});
-routes.push({ path: '/ifi/classs/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_classManage});
-
-
-const ifi_departmentList = React.lazy(() => import('./modules/ifi/pages/department/ifi_departmentList'));
-routes.push({ path: '/ifi/departments',exact:true, name: 'لیست اطلاعات',component:ifi_departmentList});
-const ifi_departmentManage = React.lazy(() => import('./modules/ifi/pages/department/ifi_departmentManage'));
-routes.push({ path: '/ifi/departments/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_departmentManage});
-routes.push({ path: '/ifi/departments/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_departmentManage});
-
-
-const ifi_paycenterList = React.lazy(() => import('./modules/ifi/pages/paycenter/ifi_paycenterList'));
-routes.push({ path: '/ifi/paycenters',exact:true, name: 'لیست اطلاعات',component:ifi_paycenterList});
-const ifi_paycenterManage = React.lazy(() => import('./modules/ifi/pages/paycenter/ifi_paycenterManage'));
-routes.push({ path: '/ifi/paycenters/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_paycenterManage});
-routes.push({ path: '/ifi/paycenters/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_paycenterManage});
-
-
-const ifi_programestimationList = React.lazy(() => import('./modules/ifi/pages/programestimation/ifi_programestimationList'));
-routes.push({ path: '/ifi/programestimations',exact:true, name: 'لیست اطلاعات',component:ifi_programestimationList});
-const ifi_programestimationManage = React.lazy(() => import('./modules/ifi/pages/programestimation/ifi_programestimationManage'));
-routes.push({ path: '/ifi/programestimations/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_programestimationManage});
-routes.push({ path: '/ifi/programestimations/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_programestimationManage});
-
-
-const ifi_employeeList = React.lazy(() => import('./modules/ifi/pages/employee/ifi_employeeList'));
-routes.push({ path: '/ifi/employees',exact:true, name: 'لیست اطلاعات',component:ifi_employeeList});
-const ifi_employeeManage = React.lazy(() => import('./modules/ifi/pages/employee/ifi_employeeManage'));
-routes.push({ path: '/ifi/employees/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_employeeManage});
-routes.push({ path: '/ifi/employees/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_employeeManage});
-
-
-const ifi_employmenttypeList = React.lazy(() => import('./modules/ifi/pages/employmenttype/ifi_employmenttypeList'));
-routes.push({ path: '/ifi/employmenttypes',exact:true, name: 'لیست اطلاعات',component:ifi_employmenttypeList});
-const ifi_employmenttypeManage = React.lazy(() => import('./modules/ifi/pages/employmenttype/ifi_employmenttypeManage'));
-routes.push({ path: '/ifi/employmenttypes/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_employmenttypeManage});
-routes.push({ path: '/ifi/employmenttypes/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_employmenttypeManage});
-
-
-const ifi_programestimationemployeeList = React.lazy(() => import('./modules/ifi/pages/programestimationemployee/ifi_programestimationemployeeList'));
-routes.push({ path: '/ifi/programestimationemployees',exact:true, name: 'لیست اطلاعات',component:ifi_programestimationemployeeList});
-const ifi_programestimationemployeeManage = React.lazy(() => import('./modules/ifi/pages/programestimationemployee/ifi_programestimationemployeeManage'));
-routes.push({ path: '/ifi/programestimationemployees/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_programestimationemployeeManage});
-routes.push({ path: '/ifi/programestimationemployees/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_programestimationemployeeManage});
-
-
-const ifi_regionList = React.lazy(() => import('./modules/ifi/pages/region/ifi_regionList'));
-routes.push({ path: '/ifi/regions',exact:true, name: 'لیست اطلاعات',component:ifi_regionList});
-const ifi_regionManage = React.lazy(() => import('./modules/ifi/pages/region/ifi_regionManage'));
-routes.push({ path: '/ifi/regions/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_regionManage});
-routes.push({ path: '/ifi/regions/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_regionManage});
-
-
-const ifi_roleList = React.lazy(() => import('./modules/ifi/pages/role/ifi_roleList'));
-routes.push({ path: '/ifi/roles',exact:true, name: 'لیست اطلاعات',component:ifi_roleList});
-const ifi_roleManage = React.lazy(() => import('./modules/ifi/pages/role/ifi_roleManage'));
-routes.push({ path: '/ifi/roles/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_roleManage});
-routes.push({ path: '/ifi/roles/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_roleManage});
-
-
-const ifi_taxtypeList = React.lazy(() => import('./modules/ifi/pages/taxtype/ifi_taxtypeList'));
-routes.push({ path: '/ifi/taxtypes',exact:true, name: 'لیست اطلاعات',component:ifi_taxtypeList});
-const ifi_taxtypeManage = React.lazy(() => import('./modules/ifi/pages/taxtype/ifi_taxtypeManage'));
-routes.push({ path: '/ifi/taxtypes/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_taxtypeManage});
-routes.push({ path: '/ifi/taxtypes/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_taxtypeManage});
-
-
-const ifi_programmaketypeList = React.lazy(() => import('./modules/ifi/pages/programmaketype/ifi_programmaketypeList'));
-routes.push({ path: '/ifi/programmaketypes',exact:true, name: 'لیست اطلاعات',component:ifi_programmaketypeList});
-const ifi_programmaketypeManage = React.lazy(() => import('./modules/ifi/pages/programmaketype/ifi_programmaketypeManage'));
-routes.push({ path: '/ifi/programmaketypes/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_programmaketypeManage});
-routes.push({ path: '/ifi/programmaketypes/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_programmaketypeManage});
-
 const ifi_dfnList = React.lazy(() => import('./modules/ifi/pages/dfn/ifi_dfnList'));
-routes.push({ path: '/ifi/dfns',exact:true, name: 'لیست اطلاعات',component:ifi_dfnList});
+routes.push({ path: '/ifi/dfns',exact:true, name: 'لیست فیلدها',component:ifi_dfnList});
 const ifi_dfnManage = React.lazy(() => import('./modules/ifi/pages/dfn/ifi_dfnManage'));
-routes.push({ path: '/ifi/dfns/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_dfnManage});
-routes.push({ path: '/ifi/dfns/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_dfnManage});
+routes.push({ path: '/ifi/dfns/management/:id',exact:false, name: 'ویرایش فیلد',component:ifi_dfnManage});
+routes.push({ path: '/ifi/dfns/management',exact:false, name: 'تغریف فیلدها',component:ifi_dfnManage});
 
 
 const ifi_personelList = React.lazy(() => import('./modules/ifi/pages/personel/ifi_personelList'));
-routes.push({ path: '/ifi/personels',exact:true, name: 'لیست اطلاعات',component:ifi_personelList});
+routes.push({ path: '/ifi/personels',exact:true, name: 'لیست پرسنل',component:ifi_personelList});
 const ifi_personelManage = React.lazy(() => import('./modules/ifi/pages/personel/ifi_personelManage'));
-routes.push({ path: '/ifi/personels/management/:id',exact:false, name: 'مدیریت اطلاعات',component:ifi_personelManage});
-routes.push({ path: '/ifi/personels/management',exact:false, name: 'مدیریت اطلاعات',component:ifi_personelManage});
+routes.push({ path: '/ifi/personels/management/:id',exact:false, name: 'ویرایش پرسنل',component:ifi_personelManage});
+routes.push({ path: '/ifi/personels/management',exact:false, name: 'تعریف پرسنل',component:ifi_personelManage});
 
 export default routes;

@@ -5,7 +5,10 @@ import PropTypes from 'prop-types';
 
 import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/logo.png'
+import usericon from '../../assets/img/user.png'
+import timeicon from '../../assets/img/clock.png'
 import sygnet from '../../assets/img/brand/sygnet.svg'
+import AccessManager from "../../classes/AccessManager";
 
 const propTypes = {
   children: PropTypes.node,
@@ -23,11 +26,22 @@ class DefaultHeader extends Component {
       <React.Fragment>
           <AppSidebarToggler className="d-md-down-none" display="lg" />
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
-        <AppNavbarBrand
-          full={{ src: logo, width: 60, height: 50, alt: 'CoreUI Logo' }}
-          minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}
-        />
+        {/*<AppNavbarBrand*/}
+          {/*full={{ src: logo, width: 60, height: 50, alt: 'CoreUI Logo' }}*/}
+          {/*minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}*/}
+        {/*/>*/}
+          <Nav className="d-md-down-none" navbar>
 
+          <div className="userlogintime px-3">
+              زمان ورود به سیستم:
+              {"  "+AccessManager.getUserLoginTime()}
+              <img src={timeicon} />
+          </div>
+              <div className="userdisplayname px-3">
+                  {AccessManager.getUserDisplayName()}
+                  <img src={usericon} />
+              </div>
+          </Nav>
         {/*<Nav className="d-md-down-none" navbar>*/}
           {/*<NavItem className="px-3">*/}
             {/*<NavLink href="/">Dashboard</NavLink>*/}

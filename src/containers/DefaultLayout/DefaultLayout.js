@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch,BrowserRouter } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import {
@@ -18,6 +18,8 @@ import {
 import navigation from '../../_nav';
 // routes config
 import routes from '../../routes';
+import AccessManager from "../../classes/AccessManager";
+import SweetFetcher from "../../classes/sweet-fetcher";
 
 const DefaultAside = React.lazy(() => import('./DefaultAside'));
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
@@ -33,6 +35,9 @@ class DefaultLayout extends Component {
   }
 
   render() {
+      if(!AccessManager.UserIsLoggedIn())
+          this.props.history.push('/login');
+      new SweetFetcher().Fetch('dfn?id=1','get',null,()=>{},'cmn_dfn','view',this.props.history);
     return (
       <div className="app">
         <AppHeader fixed>
@@ -54,7 +59,7 @@ class DefaultLayout extends Component {
             <AppBreadcrumb appRoutes={routes}/>
             <Container fluid>
               <Suspense fallback={this.loading()}>
-                <Switch>
+                  <Switch>
                   {routes.map((route, idx) => {
                     return route.component ? (
                       <Route
@@ -67,7 +72,7 @@ class DefaultLayout extends Component {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from="/" to="/login" />
+
                 </Switch>
               </Suspense>
             </Container>

@@ -1,14 +1,6 @@
 export default {
   items: [
       {
-          name: 'فیلدهای انتخابی',
-          icon: 'icon-list',
-          badge: {
-              variant: 'info',
-          },
-          url: '/ifi/dfns',
-      },
-      {
           name: 'اطلاعات پایه',
           icon: 'icon-list',
           badge: {
@@ -22,561 +14,570 @@ export default {
                   badge: {
                       variant: 'info',
                   },
-              },
-              {
-                  name: 'تعریف پرونده برآورد',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'تعریف فعالیت برآورد',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'فعالیت برنامه سازی',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'ساختار فعالیت',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'ثبت مرکز هزینه/گروه',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'پیگیری حقوقی برآورد',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'ثبت معافیت مالیاتی',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'پرداخت صندوق رفاه',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
 
-          ],
-      },
-      {
-          name: 'برآورد',
-          url: '/list/Empty',
-          icon: 'icon-speedometer',
-          badge: {
-              variant: 'info',
-          },
-          children:[
-              {
-                  name: 'مجوز قطعی پرداخت',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
               },
               {
-                  name: 'ثبت مکانیزه مجوز قطعی پرداخت',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'ثبت سند حسابداری',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-                  children:[
-
-                      {
-                          name: 'ثبت سند موقت',
-                          url: '/list/Empty',
-                          icon: 'icon-speedometer',
-                          badge: {
-                              variant: 'info',
-                          },
-
-                      },
-
-                      {
-                          name: 'ثبت سند مالی',
-                          url: '/list/Empty',
-                          icon: 'icon-speedometer',
-                          badge: {
-                              variant: 'info',
-                          },
-
-                      },
-                  ],
-              },
-              {
-                  name: 'مشاهده تاریخ برآورد',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'تغییر تاریخ مجوز قطعی',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'ثبت سند پیش نویس',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'لیست مجوز قطعی پرداخت',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'علی الحساب برنامه ای',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'پیش پرداخت پیمانی',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'سابقه دریافت برآوردی',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'کاردکی برآورد پرسنل',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'کاردکی سالانه پرسنل',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-          ],
-      },
-      {
-          name: 'گزارشات',
-          url: '/list/Empty',
-          icon: 'icon-speedometer',
-          badge: {
-              variant: 'info',
-          },
-          children:[
-              {
-                  name: 'لیست ارسال بانک',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'تهیه دیسکت ارسالی',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'فیش پرسنل برنامه ای',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'انتقال اطلاعات فیش',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'لیست پرسنل',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'لیست اطلاعات پایه',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'لیست وام صندوق رفاه',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'لیست ارسال امور اداری',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'لیست حسابداری کل',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'لیست وام های مکسوره',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'لیست سایر کسور',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'جستجوی مبلغ خالص',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'گزارشات آماری برآورد',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'لیست مالیات برآورد',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-
-          ],
-      },
-      {
-          name: 'امکانات',
-          url: '/list/Empty',
-          icon: 'icon-speedometer',
-          badge: {
-              variant: 'info',
-          },
-          children:[
-              {
-                  name: 'مشاهده گزارش',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'معرفی کاربران',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'تغییر رمز کاربران',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'تغییر سال مالی',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'ایجاد سال مالی',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'تهیه فایل پشتیبان',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'بازیابی اطلاعات',
-                  url: '/list/Empty',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-          ],
-      },
-
-      {
-          name: 'اطلاعات جداول اولیه',
-          icon: 'icon-list',
-          badge: {
-              variant: 'info',
-          },
-          children:[
-              {
-                  name: 'ABH',
-                  url: '/list/ABH',
+                  name: 'اطلاعات ساختار سازمانی',
                   icon: 'icon-list',
                   badge: {
                       variant: 'info',
                   },
+                  url: '/ifi/dfns',
               },
-              {
-                  name: 'ABH2',
-                  url: '/list/ABH2',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'B28TOKOL',
-                  url: '/list/B28TOKOL',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'BAR(براورد)',
-                  url: '/list/BAR',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'BAX',
-                  url: '/list/BAX',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'BHA',
-                  url: '/list/BHA',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'BTMP',
-                  url: '/list/BTMP',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'EXP',
-                  url: '/list/EXP',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'EXPNEW',
-                  url: '/list/EXPNEW',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'FIX',
-                  url: '/list/FIX',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'MAR(مرکز هزینه)',
-                  url: '/list/MAR',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'MBAN',
-                  url: '/list/MBAN',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'PER(پرسنل)',
-                  url: '/list/PER',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'PREP',
-                  url: '/list/PREP',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'PSANAD',
-                  url: '/list/PSANAD',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'PTMP',
-                  url: '/list/PTMP',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'SANAD',
-                  url: '/list/SANAD',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'SAR',
-                  url: '/list/SAR',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'USER',
-                  url: '/list/USER',
-                  icon: 'icon-user-female',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
-              {
-                  name: 'VAM',
-                  url: '/list/VAM',
-                  icon: 'icon-speedometer',
-                  badge: {
-                      variant: 'info',
-                  },
-              },
+              // {
+              //     name: 'تعریف پرونده برآورد',
+              //     url: '/list/Empty',
+              //     icon: 'icon-speedometer',
+              //     badge: {
+              //         variant: 'info',
+              //     },
+              // },
+              // {
+              //     name: 'تعریف فعالیت برآورد',
+              //     url: '/list/Empty',
+              //     icon: 'icon-speedometer',
+              //     badge: {
+              //         variant: 'info',
+              //     },
+              // },
+              // {
+              //     name: 'فعالیت برنامه سازی',
+              //     url: '/list/Empty',
+              //     icon: 'icon-speedometer',
+              //     badge: {
+              //         variant: 'info',
+              //     },
+              // },
+              // {
+              //     name: 'ساختار فعالیت',
+              //     url: '/list/Empty',
+              //     icon: 'icon-speedometer',
+              //     badge: {
+              //         variant: 'info',
+              //     },
+              // },
+              // {
+              //     name: 'ثبت مرکز هزینه/گروه',
+              //     url: '/list/Empty',
+              //     icon: 'icon-speedometer',
+              //     badge: {
+              //         variant: 'info',
+              //     },
+              // },
+              // {
+              //     name: 'پیگیری حقوقی برآورد',
+              //     url: '/list/Empty',
+              //     icon: 'icon-speedometer',
+              //     badge: {
+              //         variant: 'info',
+              //     },
+              // },
+              // {
+              //     name: 'ثبت معافیت مالیاتی',
+              //     url: '/list/Empty',
+              //     icon: 'icon-speedometer',
+              //     badge: {
+              //         variant: 'info',
+              //     },
+              // },
+              // {
+              //     name: 'پرداخت صندوق رفاه',
+              //     url: '/list/Empty',
+              //     icon: 'icon-speedometer',
+              //     badge: {
+              //         variant: 'info',
+              //     },
+              // },
+
           ],
       },
+      // {
+      //     name: 'برآورد',
+      //     url: '/list/Empty',
+      //     icon: 'icon-speedometer',
+      //     badge: {
+      //         variant: 'info',
+      //     },
+      //     children:[
+      //         {
+      //             name: 'مجوز قطعی پرداخت',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'ثبت مکانیزه مجوز قطعی پرداخت',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'ثبت سند حسابداری',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //             children:[
+      //
+      //                 {
+      //                     name: 'ثبت سند موقت',
+      //                     url: '/list/Empty',
+      //                     icon: 'icon-speedometer',
+      //                     badge: {
+      //                         variant: 'info',
+      //                     },
+      //
+      //                 },
+      //
+      //                 {
+      //                     name: 'ثبت سند مالی',
+      //                     url: '/list/Empty',
+      //                     icon: 'icon-speedometer',
+      //                     badge: {
+      //                         variant: 'info',
+      //                     },
+      //
+      //                 },
+      //             ],
+      //         },
+      //         {
+      //             name: 'مشاهده تاریخ برآورد',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'تغییر تاریخ مجوز قطعی',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'ثبت سند پیش نویس',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'لیست مجوز قطعی پرداخت',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'علی الحساب برنامه ای',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'پیش پرداخت پیمانی',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'سابقه دریافت برآوردی',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'کاردکی برآورد پرسنل',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'کاردکی سالانه پرسنل',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //     ],
+      // },
+      // {
+      //     name: 'گزارشات',
+      //     url: '/list/Empty',
+      //     icon: 'icon-speedometer',
+      //     badge: {
+      //         variant: 'info',
+      //     },
+      //     children:[
+      //         {
+      //             name: 'لیست ارسال بانک',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'تهیه دیسکت ارسالی',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'فیش پرسنل برنامه ای',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'انتقال اطلاعات فیش',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'لیست پرسنل',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'لیست اطلاعات پایه',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'لیست وام صندوق رفاه',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'لیست ارسال امور اداری',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'لیست حسابداری کل',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'لیست وام های مکسوره',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'لیست سایر کسور',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'جستجوی مبلغ خالص',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'گزارشات آماری برآورد',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'لیست مالیات برآورد',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //
+      //     ],
+      // },
+      // {
+      //     name: 'امکانات',
+      //     url: '/list/Empty',
+      //     icon: 'icon-speedometer',
+      //     badge: {
+      //         variant: 'info',
+      //     },
+      //     children:[
+      //         {
+      //             name: 'مشاهده گزارش',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'معرفی کاربران',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'تغییر رمز کاربران',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'تغییر سال مالی',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'ایجاد سال مالی',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'تهیه فایل پشتیبان',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'بازیابی اطلاعات',
+      //             url: '/list/Empty',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //     ],
+      // },
+      //
+      // {
+      //     name: 'اطلاعات جداول اولیه',
+      //     icon: 'icon-list',
+      //     badge: {
+      //         variant: 'info',
+      //     },
+      //     children:[
+      //         {
+      //             name: 'ABH',
+      //             url: '/list/ABH',
+      //             icon: 'icon-list',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'ABH2',
+      //             url: '/list/ABH2',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'B28TOKOL',
+      //             url: '/list/B28TOKOL',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'BAR(براورد)',
+      //             url: '/list/BAR',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'BAX',
+      //             url: '/list/BAX',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'BHA',
+      //             url: '/list/BHA',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'BTMP',
+      //             url: '/list/BTMP',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'EXP',
+      //             url: '/list/EXP',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'EXPNEW',
+      //             url: '/list/EXPNEW',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'FIX',
+      //             url: '/list/FIX',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'MAR(مرکز هزینه)',
+      //             url: '/list/MAR',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'MBAN',
+      //             url: '/list/MBAN',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'PER(پرسنل)',
+      //             url: '/list/PER',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'PREP',
+      //             url: '/list/PREP',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'PSANAD',
+      //             url: '/list/PSANAD',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'PTMP',
+      //             url: '/list/PTMP',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'SANAD',
+      //             url: '/list/SANAD',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'SAR',
+      //             url: '/list/SAR',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'USER',
+      //             url: '/list/USER',
+      //             icon: 'icon-user-female',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //         {
+      //             name: 'VAM',
+      //             url: '/list/VAM',
+      //             icon: 'icon-speedometer',
+      //             badge: {
+      //                 variant: 'info',
+      //             },
+      //         },
+      //     ],
+      // },
       {
           name: 'خروج',
           url: '/login',

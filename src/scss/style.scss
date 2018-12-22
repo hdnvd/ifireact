@@ -144,3 +144,53 @@ body
 {
   text-align: center;
 }
+.middlelogo
+{
+  width: 100%;
+  text-align: center;
+  margin-top: 150px;
+}
+.ltr_field
+{
+  direction: ltr;
+}
+.treerow
+{
+
+  direction: rtl !important;
+}
+.tree
+{
+  height: 100%;
+}
+.sweetalert
+{
+
+}
+
+.deletedangerbutton
+{
+
+}
+
+.cancelbutton
+{
+
+}
+.userdisplayname
+{
+
+}
+
+.userlogintime
+{
+direction: rtl;
+}
+
+.userdisplayname img,.userlogintime img
+{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  margin-left: 10px;
+}

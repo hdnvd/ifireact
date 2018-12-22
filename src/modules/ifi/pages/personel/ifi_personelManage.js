@@ -5,69 +5,66 @@ import  DatePicker  from '../../../../PersianDatePicker/components/DatePicker';
 import '../../../../scss/datepicker.scss'
 import moment from 'moment-jalaali'
 import SweetFetcher from '../../../../classes/sweet-fetcher';
-// import '../../../../scss/mbreactpersian.scss';
+import InputMask from 'react-input-mask';
+import Constants from '../../../../classes/Constants';
+import AccessManager from '../../../../classes/AccessManager';
+
 class ifi_personelManage extends React.Component {
+    tableName='personel';
     constructor(props) {
         super(props);
         this.state = {
-            
-	personelno:'',
-	nationalcode:'',
-	name:'',
-	family:'',
-	ismale:'',
-	fathername:'',
-	birth_date:moment().format('X'),
-	certificationnumber:'',
-	birthplace_fid:'',
-	birthplace_fidOptions:[],
-	nationality_fid:'',
-	nationality_fidOptions:[],
-	hesabno:'',
-	branch_fid:'',
-	branch_fidOptions:[],
+                canEdit:AccessManager.UserCan('personel',AccessManager.EDIT),
+
+			personelno:'',
+			nationalcode:'',
+			name:'',
+			family:'',
+			gender_fid:'',
+			gender_fidOptions:[],
+			fathername:'',
+			birth_date:moment().format('jYYYY/jMM/jDD'),
+			certificationnumber:'',
+			birthplace:'',
+			nationality_fid:'',
+			nationality_fidOptions:[],
+			hesabno:'',
+			hmeli:'',
+			branch_fid:'',
+			branch_fidOptions:[],
         };
         if(this.props.match.params.id>0){
-        new SweetFetcher().Fetch('/personel/'+this.props.match.params.id, 'get',null,
+        new SweetFetcher().Fetch('/personel/'+this.props.match.params.id, 'get',null, 
         data => {
             
-		if(data.Data.birth_date<=0)
-                    data.birth_date=moment().format('X');
-                 this.setState({ personelno:data.Data.personelno,nationalcode:data.Data.nationalcode,name:data.Data.name,family:data.Data.family,ismale:data.Data.ismale,fathername:data.Data.fathername,birth_date:data.Data.birth_date,certificationnumber:data.Data.certificationnumber,birthplace_fid:data.Data.birthplace_fid,nationality_fid:data.Data.nationality_fid,hesabno:data.Data.hesabno,branch_fid:data.Data.branch_fid,});
+		if(data.Data.birthdate<=0)
+                    data.Data.birthdate=moment().format('jYYYY/jMM/jDD');
+                 this.setState({ personelno:data.Data.personelno,nationalcode:data.Data.nationalcode,name:data.Data.name,family:data.Data.family,gender_fid:data.Data.gender,fathername:data.Data.fathername,birth_date:data.Data.birthdate,certificationnumber:data.Data.certificationnumber,birthplace:data.Data.birthplace,nationality_fid:data.Data.nationality,hesabno:data.Data.hesabno,hmeli:data.Data.hmeli,branch_fid:data.Data.branch,});
             }, 
+            'personel',AccessManager.VIEW,
             this.props.history);
         }//IF
-// new SweetFetcher().Fetch('/dfn?PID=20','get',null,
-//                 data=>{
-//                 let Options=data.Data.map(item=><option value={item.id}>{item.title}</option>);
-//                 this.setState({birthplace_fidOptions:Options});
-//             },
-//             this.props.history);
-new SweetFetcher().Fetch('/dfn?PID=30','get',null,
+new SweetFetcher().Fetch('/dfn?pid=20','get',null,
+                data=>{
+                let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
+                this.setState({gender_fidOptions:Options});
+            }, 
+            'gender',AccessManager.VIEW,
+            this.props.history);
+new SweetFetcher().Fetch('/dfn?pid=30','get',null,
                 data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({nationality_fidOptions:Options});
-            },
+            }, 
+            'nationality',AccessManager.VIEW,
             this.props.history);
-
-        new SweetFetcher().Fetch('/dfn?PID=33','get',null,
-            data=>{
+new SweetFetcher().Fetch('/dfn?pid=33','get',null,
+                data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({branch_fidOptions:Options});
-            },
+            }, 
+            'branch',AccessManager.VIEW,
             this.props.history);
-        new SweetFetcher().Fetch('/dfn?PID=34','get',null,
-            data=>{
-                let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
-                this.setState({birthplace_fidOptions:Options});
-            },
-            this.props.history);
-// new SweetFetcher().Fetch('/ifi/branchs','get',null,
-//                 data=>{
-//                 let Options=data.Data.map(item=><option value={item.id}>{item.title}</option>);
-//                 this.setState({branch_fidOptions:Options});
-//             },
-//             this.props.history);
         
     }
     render(){
@@ -75,11 +72,15 @@ new SweetFetcher().Fetch('/dfn?PID=30','get',null,
             <MDBRow>
                 <MDBCol md='6'>
                     <form>
-                        <p className='h5 text-center mb-4'>مدیریت پرسنل</p>
+                        <p className='h5 text-center mb-4'>تعریف پرسنل</p>
                         
-                        <div className='grey-text'>
-                            <MDBInput
-                                label='کد پرسنلی'
+                        <div className='form-group'>
+                            <label htmlFor='personelno'>کد پرسنلی</label>
+                            <input
+                                className='form-control'
+                            
+                                readOnly={!this.state.canEdit}
+                                id='personelno'
                                 group
                                 type='text'
                                 validate
@@ -87,9 +88,14 @@ new SweetFetcher().Fetch('/dfn?PID=30','get',null,
                                 onChange={(event)=>{this.setState({personelno:event.target.value})}}
                             />
                         </div>
-                        <div className='grey-text'>
-                            <MDBInput
-                                label='کد ملی'
+                        <div className='form-group'>
+                            <label htmlFor='nationalcode'>کد ملی</label>
+                            <InputMask
+                                mask='9999999999'
+                                className='form-control ltr_field'
+                            
+                                readOnly={!this.state.canEdit}
+                                id='nationalcode'
                                 group
                                 type='text'
                                 validate
@@ -97,9 +103,13 @@ new SweetFetcher().Fetch('/dfn?PID=30','get',null,
                                 onChange={(event)=>{this.setState({nationalcode:event.target.value})}}
                             />
                         </div>
-                        <div className='grey-text'>
-                            <MDBInput
-                                label='نام'
+                        <div className='form-group'>
+                            <label htmlFor='name'>نام</label>
+                            <input
+                                className='form-control'
+                            
+                                readOnly={!this.state.canEdit}
+                                id='name'
                                 group
                                 type='text'
                                 validate
@@ -107,9 +117,13 @@ new SweetFetcher().Fetch('/dfn?PID=30','get',null,
                                 onChange={(event)=>{this.setState({name:event.target.value})}}
                             />
                         </div>
-                        <div className='grey-text'>
-                            <MDBInput
-                                label='نام خانوادگی'
+                        <div className='form-group'>
+                            <label htmlFor='family'>نام خانوادگی</label>
+                            <input
+                                className='form-control'
+                            
+                                readOnly={!this.state.canEdit}
+                                id='family'
                                 group
                                 type='text'
                                 validate
@@ -117,28 +131,26 @@ new SweetFetcher().Fetch('/dfn?PID=30','get',null,
                                 onChange={(event)=>{this.setState({family:event.target.value})}}
                             />
                         </div>
-                        <div className='grey-text'>
-                            <FormInline>
-                                <label>جنسیت:</label>
-                                    <Input
-                                        onClick={() => this.setState({ismale : 0})}
-                                        checked={this.state.ismale === 0}
-                                        label='زن'
-                                        type='radio'
-                                        id='radioismale1'
-                                    />
-                                    <Input
-                                        onClick={() => this.setState({ismale : 1})}
-                                        checked={this.state.ismale === 1}
-                                        label='مرد'
-                                        type='radio'
-                                        id='radioismale2'
-                                    />
-                                </FormInline>
-                        </div>
-                        <div className='grey-text'>
-                            <MDBInput
-                                label='نام پدر'
+                    <div className='grey-text'>
+                    
+                            <label htmlFor='gender_fid'>جنسیت</label>
+                        <select 
+                                id='gender_fid'
+                                className='browser-default custom-select'
+                                value={this.state.gender_fid} 
+                                disabled={!this.state.canEdit}
+                                onChange={(event)=>{this.setState({gender_fid:event.target.value})}}>
+                                <option>...انتخاب کنید</option>
+                                {this.state.gender_fidOptions}
+                            </select>
+                            </div>
+                        <div className='form-group'>
+                            <label htmlFor='fathername'>نام پدر</label>
+                            <input
+                                className='form-control'
+                            
+                                readOnly={!this.state.canEdit}
+                                id='fathername'
                                 group
                                 type='text'
                                 validate
@@ -146,22 +158,28 @@ new SweetFetcher().Fetch('/dfn?PID=30','get',null,
                                 onChange={(event)=>{this.setState({fathername:event.target.value})}}
                             />
                         </div>
-                        <div className='grey-text'>
-                            <label>تاریخ تولد:</label>
-
-                            <DatePicker
-                                label='birth_date'
+                        <div className='form-group'>
+                            <label htmlFor='birth_date'>تاریخ تولد</label>
+                            <InputMask
+                                mask='9999/99/99'
+                                className='form-control ltr_field'
+                            
+                                readOnly={!this.state.canEdit}
+                                id='birth_date'
                                 group
-                                // value={this.state.birth_date}
-                                onChange={(value)=>{
-                                if(value!=this.state.birth_date)
-                                        this.setState({birth_date:value})
-                                }}
+                                type='text'
+                                validate
+                                value={this.state.birth_date}
+                                onChange={(event)=>{this.setState({birth_date:event.target.value})}}
                             />
                         </div>
-                        <div className='grey-text'>
-                            <MDBInput
-                                label='شماره شناسنامه'
+                        <div className='form-group'>
+                            <label htmlFor='certificationnumber'>شماره شناسنامه</label>
+                            <input
+                                className='form-control'
+                            
+                                readOnly={!this.state.canEdit}
+                                id='certificationnumber'
                                 group
                                 type='text'
                                 validate
@@ -169,21 +187,41 @@ new SweetFetcher().Fetch('/dfn?PID=30','get',null,
                                 onChange={(event)=>{this.setState({certificationnumber:event.target.value})}}
                             />
                         </div>
+                        <div className='form-group'>
+                            <label htmlFor='birthplace'>محل تولد</label>
+                            <input
+                                className='form-control'
+                            
+                                readOnly={!this.state.canEdit}
+                                id='birthplace'
+                                group
+                                type='text'
+                                validate
+                                value={this.state.birthplace}
+                                onChange={(event)=>{this.setState({birthplace:event.target.value})}}
+                            />
+                        </div>
                     <div className='grey-text'>
-                        <select className='browser-default custom-select' value={this.state.birthplace_fid} onChange={(event)=>{this.setState({birthplace_fid:event.target.value})}}>
-                                <option>محل تولد</option>
-                                {this.state.birthplace_fidOptions}
-                            </select>
-                            </div>
-                    <div className='grey-text'>
-                        <select className='browser-default custom-select' value={this.state.nationality_fid} onChange={(event)=>{this.setState({nationality_fid:event.target.value})}}>
-                                <option>ملیت</option>
+                    
+                            <label htmlFor='nationality_fid'>ملیت</label>
+                        <select 
+                                id='nationality_fid'
+                                className='browser-default custom-select'
+                                value={this.state.nationality_fid} 
+                                disabled={!this.state.canEdit}
+                                onChange={(event)=>{this.setState({nationality_fid:event.target.value})}}>
+                                <option>...انتخاب کنید</option>
                                 {this.state.nationality_fidOptions}
                             </select>
                             </div>
-                        <div className='grey-text'>
-                            <MDBInput
-                                label='شماره حساب'
+                        <div className='form-group'>
+                            <label htmlFor='hesabno'>شماره حساب</label>
+                            <InputMask
+                                mask='9999999999'
+                                className='form-control ltr_field'
+                            
+                                readOnly={!this.state.canEdit}
+                                id='hesabno'
                                 group
                                 type='text'
                                 validate
@@ -191,43 +229,77 @@ new SweetFetcher().Fetch('/dfn?PID=30','get',null,
                                 onChange={(event)=>{this.setState({hesabno:event.target.value})}}
                             />
                         </div>
+                        <div className='form-group'>
+                            <label htmlFor='hmeli'>شماره حساب بانک ملی</label>
+                            <input
+                                className='form-control'
+                            
+                                readOnly={!this.state.canEdit}
+                                id='hmeli'
+                                group
+                                type='text'
+                                validate
+                                value={this.state.hmeli}
+                                onChange={(event)=>{this.setState({hmeli:event.target.value})}}
+                            />
+                        </div>
                     <div className='grey-text'>
-                        <select className='browser-default custom-select' value={this.state.branch_fid} onChange={(event)=>{this.setState({branch_fid:event.target.value})}}>
-                                <option>شعبه</option>
+                    
+                            <label htmlFor='branch_fid'>شعبه</label>
+                        <select 
+                                id='branch_fid'
+                                className='browser-default custom-select'
+                                value={this.state.branch_fid} 
+                                disabled={!this.state.canEdit}
+                                onChange={(event)=>{this.setState({branch_fid:event.target.value})}}>
+                                <option>...انتخاب کنید</option>
                                 {this.state.branch_fidOptions}
                             </select>
                             </div>    
-                        <div className='text-center'>
-                            <MDBBtn onClick={() => {
-                            let id = '';
-                            let method='post';
-                                if (this.props.match.params.id > 0)
-                                    id = this.props.match.params.id;
-                                const data = new URLSearchParams();
-                                
-	data.append('PersonelNo', this.state.personelno);
-	data.append('NationalCode', this.state.nationalcode);
-	data.append('Name', this.state.name);
-	data.append('Family', this.state.family);
-	data.append('Gender', this.state.ismale);
-	data.append('FatherName', this.state.fathername);
-	data.append('BirthDate', this.state.birth_date);
-	data.append('CertificationNumber', this.state.certificationnumber);
-	data.append('BirthPlace', this.state.birthplace_fid);
-	data.append('Nationality', this.state.nationality_fid);
-	data.append('HesabNo', this.state.hesabno);
-	data.append('Branch', this.state.branch_fid);
-	if(id!=='')
-	method='put';
-                                new SweetFetcher().Fetch('/personel/'+id,method,data,
-                                res => {
-                                            return this.props.history.push('/ifi/personels');
-                                            // console.log(res);
-                                    },
-                                    this.props.history);
-                                
+                            <div className='text-center'>
+                            {this.state.canEdit && 
+                                <MDBBtn onClick={() => {
+                                let id = '';
+                                let method='post';
+                                let action=AccessManager.INSERT;
+                                    if (this.props.match.params.id > 0)
+                                        id = this.props.match.params.id;
+                                    const data = new URLSearchParams();
+                                    
+		data.append('personelno', this.state.personelno);
+		data.append('nationalcode', this.state.nationalcode);
+		data.append('name', this.state.name);
+		data.append('family', this.state.family);
+		data.append('gender', this.state.gender_fid);
+		data.append('fathername', this.state.fathername);
+		data.append('birthdate', this.state.birth_date);
+		data.append('certificationnumber', this.state.certificationnumber);
+		data.append('birthplace', this.state.birthplace);
+		data.append('nationality', this.state.nationality_fid);
+		data.append('hesabno', this.state.hesabno);
+		data.append('hmeli', this.state.hmeli);
+		data.append('branch', this.state.branch_fid);
+		if(id!==''){
+		method='put';
+		action=AccessManager.EDIT;
+		data.append('id', id);
+	}
+                                    new SweetFetcher().Fetch('/personel/'+id,method,data, 
+                                    res => {
+                                                return this.props.history.push('/ifi/personels');
+                                                //console.log(res);
+                                        },
+                                        'personel',action,
+                                        this.props.history);
+                                    
+                                }
+                                }>ذخیره</MDBBtn>
                             }
-                            }>ذخیره</MDBBtn>
+                            <MDBBtn onClick={() =>
+                             {
+                                this.props.history.push('/ifi/personels');
+                             }
+                            }>بازگشت</MDBBtn>
                         </div>
                     </form>
                 </MDBCol>

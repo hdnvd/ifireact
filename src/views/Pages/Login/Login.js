@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Logo from '../../../logo.png'
 import Cookies from 'universal-cookie';
+import moment from 'moment-jalaali'
 
 import {
     Button,
@@ -19,6 +20,7 @@ import {
 } from 'reactstrap';
 import Constants from "../../../classes/Constants";
 import SweetFetcher from "../../../classes/sweet-fetcher";
+import Common from "../../../classes/Common";
 
 class Login extends Component {
     constructor(props) {
@@ -28,6 +30,8 @@ class Login extends Component {
             username: '',
             password: '',
         };
+        let cookies = new Cookies();
+        cookies.set('sessionkey', '');
 
     }
 
@@ -75,10 +79,15 @@ class Login extends Component {
                                                         new SweetFetcher().Fetch('/USERs/login', 'post', data, data => {
                                                             console.log(data);
                                                             let cookies = new Cookies();
-                                                            cookies.set(data);
-                                                            cookies.set('sessionkey', data.Data.sessionkey);
+                                                            // cookies.set(data);
+
+                                                            cookies.set('sessionkey', data.Data.sessionkey,{ path: '/' });
+                                                            cookies.set('userdisplayname', data.Data.displayname,{ path: '/' });
+
+                                                            cookies.set('userlogintime', moment().locale('fa').format('HH:mm'),{ path: '/' });
+                                                            cookies.set('access', Common.convertObjectPropertiesToLowerCase(data.Data.access),{ path: '/' });
                                                             if (data.Data.sessionkey.length > 2)
-                                                                this.props.history.push('/ifi/dfns');
+                                                                this.props.history.push('/');
                                                             else
                                                                 alert("اطلاعات کاربری صحیح نمی باشد.");
 

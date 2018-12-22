@@ -2,12 +2,15 @@
 import 'react-table/react-table.css'
 import Constants from "./Constants";
 import Cookies from "universal-cookie";
+import Common from "./Common";
+import SweetAlert from "./SweetAlert";
 
 
 class SweetFetcher {
     cookies = new Cookies();
+
     SiteURL=Constants.SiteURL;
-    Fetch(URL,Method,PostData,AfterFetchFunction,history){
+    Fetch(URL,Method,PostData,AfterFetchFunction,ServiceName,ActionName,history){
         Method=Method.toString().trim().toLowerCase();
         let FetchInfo={
             method: Method,
@@ -23,52 +26,63 @@ class SweetFetcher {
         if(PostData!=null)
         {
 
-            if(Method==="put")
-            {
-                PostData.append('_method', 'PUT');
-                FetchInfo.method="post";
-            }
+            // if(Method==="put")
+            // {
+            //     // PostData.append('_method', 'put');
+            //     // FetchInfo.method="post";
+            // }
+            // console.log(URL);
+            // console.log(Method);
             FetchInfo.body=PostData;
 
         }
-        console.log(FetchInfo.body);
+        // console.log(FetchInfo.body);
         fetch(this.SiteURL+URL,FetchInfo)
             .then(response => {
+                console.log(response);
+                // console.log(this.cookies.get('sessionkey'));
+
                 if (!response.ok) {
 
                     let status=response.status;
                     if(status.toString().trim()==="403")
                         history.push('/login')
 
-                }
-                return response.json()})
-            .then(data => {
-                // console.log(data);
-                if(Array.isArray(data.Data))
-                {
-                    for(let i=0;i<data.Data.length;i++)
+                    if(status.toString().trim()==="405")
                     {
-                        data.Data[i]=this.getPropertiesToLower(data.Data[i]);
+                        SweetAlert.displayAccessDeniedAlert();
                     }
+
                 }
-                else if(data.Data!=null)
+                else
                 {
-                    data.Data=this.getPropertiesToLower(data.Data);
+                    // console.log(this.cookies.get('sessionkey'));
+                    // console.log(response);
+                    return response.json();
                 }
-                // console.log(data);
-                AfterFetchFunction(data);
+
+            })
+            .then(data => {
+
+                if(data!=null)
+                {
+                    console.log(data);
+                    if(Array.isArray(data.Data))
+                    {
+                        for(let i=0;i<data.Data.length;i++)
+                        {
+                            data.Data[i]=Common.convertObjectPropertiesToLowerCase(data.Data[i]);
+                        }
+                    }
+                    else if(data.Data!=null)
+                    {
+                        data.Data=Common.convertObjectPropertiesToLowerCase(data.Data);
+                    }
+                    // console.log(data);
+                    AfterFetchFunction(data);
+                }
+
             });
-    }
-    getPropertiesToLower(obj)
-    {
-        let key, keys = Object.keys(obj);
-        let n = keys.length;
-        let newobj={}
-        while (n--) {
-            key = keys[n];
-            newobj[key.toLowerCase()] = obj[key];
-        }
-        return newobj;
     }
 }
 

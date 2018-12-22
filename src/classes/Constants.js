@@ -8,6 +8,7 @@ import 'react-table/react-table.css'
 
 class Constants {
     static SiteURL="http://77.104.83.68:813/api";
+    static DefaultPageSize=25;
 
 }
 
