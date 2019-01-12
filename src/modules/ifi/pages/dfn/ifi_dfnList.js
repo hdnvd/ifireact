@@ -51,7 +51,7 @@ class ifi_dfnList extends React.Component {
                         <MdDeleteForever onClick={
                             () => {
                                 SweetAlert.displayDeleteAlert(() => {
-                                    new SweetFetcher().Fetch('/dfn/' + dt[i].id, 'delete', null,
+                                    new SweetFetcher().Fetch('/dfn/' + dt[i].id, SweetFetcher.METHOD_DELETE, null,
                                         data => {
                                             this.LoadData(Constants.DefaultPageSize, this.state.page + 1, null, null);
                                         },
@@ -67,7 +67,7 @@ class ifi_dfnList extends React.Component {
                 return treeData;
     };
     LoadData(pid, pageSize, page, sorted, filtered) {
-        new SweetFetcher().Fetch('/dfn', 'get', null,
+        new SweetFetcher().Fetch('/dfn', SweetFetcher.METHOD_GET, null,
             data => {
                 let AllData=data.Data;
                 let AllAssociatedData=[];

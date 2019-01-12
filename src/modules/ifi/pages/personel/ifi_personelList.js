@@ -10,8 +10,10 @@ import SweetFetcher from '../../../../classes/sweet-fetcher';
 import SweetAlert from '../../../../classes/SweetAlert';
 import Constants from '../../../../classes/Constants';
 import AccessManager from '../../../../classes/AccessManager';
+import Common from "../../../../classes/Common";
+import SweetComponent from "../../../../classes/sweet-component";
 
-class ifi_personelList extends React.Component {
+class ifi_personelList extends SweetComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,22 +29,21 @@ class ifi_personelList extends React.Component {
     }
     LoadData(pageSize,page,sorted,filtered)
     {
-        let filterString='';
-        for(let i=0;filtered!=null && i<filtered.length;i++)
-        {
-            filterString+=filtered[i].id+'='+filtered[i].value;
-        }
-        if(filterString!="")
-            filterString='&'+filterString;
+        let filterString=this.HttpGetParamsFromArray(filtered);
+        if(filterString!='') filterString='&'+filterString;
         let url='/personel?pg='+page+filterString;
-        new SweetFetcher().Fetch(url, 'get', null,
+        new SweetFetcher().Fetch(url, SweetFetcher.METHOD_GET, null,
             data => {
                 let Pages=Math.ceil(data.RecordCount/Constants.DefaultPageSize);
+                for(let i=0;i<data.Data.length;i++)
+                    data.Data[i]=Common.convertNullKeysToEmpty(data.Data[i]);
+                console.log(data.Data);
                 this.setState({data: data.Data,pages:Pages})
             },
             'personel',AccessManager.VIEW,
             this.props.history);
     };
+
     render(){
         return <div className={'pagecontent'}>
             <div className={'topoperationsrow'}><Link className={'addlink'}  to={'/ifi/personels/management'}><IoMdAddCircle/></Link></div>
@@ -53,6 +54,7 @@ class ifi_personelList extends React.Component {
                 data={this.state.data}
                 pages={this.state.pages}
                 columns={this.columns}
+                excludedExportColumns={'personelid'}
                 manual
                 onFetchData={(state, instance) => {
                     this.setState({loading: true,page:state.page});
@@ -65,23 +67,28 @@ class ifi_personelList extends React.Component {
     columns = [
         {
             Header: 'کد پرسنلی',
-            accessor: 'personelno'
+            accessor: 'personelno',
+            filterable:false,
         },
         {
+            accessor: 'nationalcode',
             Header: 'کد ملی',
-            accessor: 'nationalcode'
+            filterable:true,
         },
         {
             Header: 'نام',
-            accessor: 'name'
+            accessor: 'name',
+            filterable:true,
         },
         {
             Header: 'نام خانوادگی',
-            accessor: 'family'
+            accessor: 'family',
+            filterable:true,
         },
         {
             Header: 'شماره حساب بانک ملی',
-            accessor: 'hmeli'
+            accessor: 'hmeli',
+            filterable:false,
         },
         {
             Header: 'عملیات',
@@ -97,7 +104,7 @@ class ifi_personelList extends React.Component {
                 <MdDeleteForever onClick={
                     () =>{
                         SweetAlert.displayDeleteAlert(()=>{
-                            new SweetFetcher().Fetch('/personel/' + props.value, 'delete', null,
+                            new SweetFetcher().Fetch('/personel/' + props.value, SweetFetcher.METHOD_DELETE, null,
                                 data => {
                                     this.LoadData(Constants.DefaultPageSize,this.state.page+1,null,null);
                                 },

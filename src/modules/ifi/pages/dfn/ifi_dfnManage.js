@@ -26,7 +26,7 @@ class ifi_dfnManage extends React.Component {
             dfn_fidOptions:[],
         };
         if(this.props.match.params.id>0){
-            new SweetFetcher().Fetch('/dfn/'+this.props.match.params.id, 'get',null,
+            new SweetFetcher().Fetch('/dfn/'+this.props.match.params.id, SweetFetcher.METHOD_GET,null,
                 data => {
 
                     this.setState({ name:data.Data.name,latinname:data.Data.latinname,vlu:data.Data.vlu,vlutxt:data.Data.vlutxt,tag:data.Data.tag,readonly:data.Data.readonly,guid:data.Data.guid,dfn_fid:data.Data.pid,});
@@ -34,7 +34,7 @@ class ifi_dfnManage extends React.Component {
                 'dfn',AccessManager.VIEW,
                 this.props.history);
         }//IF
-        new SweetFetcher().Fetch('/dfn','get',null,
+        new SweetFetcher().Fetch('/dfn',SweetFetcher.METHOD_GET,null,
             data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({dfn_fidOptions:Options});
@@ -159,7 +159,7 @@ class ifi_dfnManage extends React.Component {
                             {this.state.canEdit &&
                             <MDBBtn onClick={() => {
                                 let id = '';
-                                let method='post';
+                                let method=SweetFetcher.METHOD_POST;
                                 let action=AccessManager.INSERT;
                                 if (this.props.match.params.id > 0)
                                     id = this.props.match.params.id;
@@ -173,7 +173,7 @@ class ifi_dfnManage extends React.Component {
                                 data.append('readonly', this.state.readonly);
                                 data.append('pid', this.state.dfn_fid);
                                 if(id!==''){
-                                    method='put';
+                                    method=SweetFetcher.METHOD_PUT;
                                     action=AccessManager.EDIT;
                                     data.append('id', id);
                                 }
