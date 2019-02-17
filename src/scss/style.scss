@@ -194,3 +194,51 @@ direction: rtl;
   margin-right: 10px;
   margin-left: 10px;
 }
+.excelicon
+{
+  width: 30px;
+  height: 30px;
+}
+.imageuploadpreview
+{
+  margin-top: 20px;
+  width: 300px;
+  border-radius: 15px;
+  clear: both;
+  display: block;
+}
+.valuelabel
+{
+  margin-right: 0;
+  background: #ebebeb;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+}
+.textarea.form-control
+{
+  height: 200px;
+}
+.file.form-control
+{
+  height: auto;
+}
+.header-fixed .app-header
+{
+  z-index:1000;
+}
+.sidebar-fixed .sidebar
+{
+
+  z-index:999;
+}
+.headerimage
+{
+  width: 1024px;
+}
+.headerimagediv
+{
+  width: 100%;
+  text-align: center;
+  background: #ffffff;
+}

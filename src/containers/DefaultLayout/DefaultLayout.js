@@ -16,6 +16,7 @@ import {
 } from '@coreui/react';
 // sidebar nav config
 import navigation from '../../_nav';
+import header from '../../assets/img/header.png'
 // routes config
 import routes from '../../routes';
 import AccessManager from "../../classes/AccessManager";
@@ -35,11 +36,14 @@ class DefaultLayout extends Component {
   }
 
   render() {
-      if(!AccessManager.UserIsLoggedIn())
-          this.props.history.push('/login');
-      new SweetFetcher().Fetch('dfn?id=1','get',null,()=>{},'cmn_dfn','view',this.props.history);
+      // if(!AccessManager.UserIsLoggedIn())
+      //     this.props.history.push('/login');
+      new SweetFetcher().Fetch('/users/current',SweetFetcher.METHOD_GET,null,()=>{},null,'cmn_dfn',AccessManager.VIEW,this.props.history);
     return (
       <div className="app">
+
+          {/*<div className={'headerimagediv'} >*/}
+              {/*<img src={header} className={'headerimage'} /></div>*/}
         <AppHeader fixed>
           <Suspense  fallback={this.loading()}>
             <DefaultHeader onLogout={e=>this.signOut(e)}/>

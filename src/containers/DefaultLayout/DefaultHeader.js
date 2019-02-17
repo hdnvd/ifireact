@@ -31,7 +31,6 @@ class DefaultHeader extends Component {
           {/*minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}*/}
         {/*/>*/}
           <Nav className="d-md-down-none" navbar>
-
           <div className="userlogintime px-3">
               زمان ورود به سیستم:
               {"  "+AccessManager.getUserLoginTime()}

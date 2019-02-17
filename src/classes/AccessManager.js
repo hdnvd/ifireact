@@ -3,20 +3,55 @@ import * as React from 'react';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import Cookies from 'universal-cookie';
+import Constants from "./Constants";
 
 class AccessManager{
+    static LIST='list';
     static VIEW='view';
     static EDIT='edit';
     static INSERT='insert';
     static DELETE='delete';
-    static UserCan(TableName,Action)
+    static UserCan(ModuleName,TableName,Action)
     {
-        let cookies = new Cookies();
-        let access=cookies.get('access');
-        console.log(access);
-        let ActionString=TableName + "."+Action;
-        let hasAccess=(access.hasOwnProperty(ActionString) && access[ActionString]==1);
-        return hasAccess;
+        if(Constants.ServerMode===Constants.SERVERMODE_LARAVEL) {
+            let cookies = new Cookies();
+            console.log(access);
+            ModuleName=ModuleName.toLowerCase();
+            TableName=TableName.toLowerCase();
+            Action=Action.toLowerCase();
+            let ActionString=ModuleName+'.'+TableName + "."+Action;
+            let access=cookies.get('access.'+ActionString);
+            // let hasAccess=false;
+
+            console.log('Checking Access List '+ActionString);
+            // console.log(access.length);
+            // console.log(Object.keys(access));
+            return access!=null;
+            // let keys=Object.keys(access);
+            // for(let i=0; keys!==null && i<keys.length;i++)
+            // {
+            //     console.log(access[keys[i]].name.toLowerCase().trim());
+            //     let Access=(access[keys[i]].name.toLowerCase().trim()===ActionString);
+            //     if(Access)
+            //     {
+            //         hasAccess=true;
+            //         break;
+            //     }
+            // }
+            // return hasAccess;
+        }
+        else
+        {
+            if(Action===AccessManager.LIST)
+                Action=AccessManager.VIEW;
+            let cookies = new Cookies();
+            let access=cookies.get('access');
+            console.log(access);
+            let ActionString=TableName + "."+Action;
+            let hasAccess=(access.hasOwnProperty(ActionString) && access[ActionString].toString()==="1");
+            return hasAccess;
+        }
+
     }
     static UserIsLoggedIn()
     {

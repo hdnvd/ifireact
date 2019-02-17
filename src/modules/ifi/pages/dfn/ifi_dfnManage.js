@@ -13,7 +13,7 @@ class ifi_dfnManage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            canEdit:AccessManager.UserCan('cmn_dfn',AccessManager.EDIT),
+            canEdit:AccessManager.UserCan('ifi','cmn_dfn',AccessManager.EDIT),
 
             name:'',
             latinname:'',
@@ -30,7 +30,7 @@ class ifi_dfnManage extends React.Component {
                 data => {
 
                     this.setState({ name:data.Data.name,latinname:data.Data.latinname,vlu:data.Data.vlu,vlutxt:data.Data.vlutxt,tag:data.Data.tag,readonly:data.Data.readonly,guid:data.Data.guid,dfn_fid:data.Data.pid,});
-                },
+                },null,
                 'dfn',AccessManager.VIEW,
                 this.props.history);
         }//IF
@@ -38,7 +38,7 @@ class ifi_dfnManage extends React.Component {
             data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({dfn_fidOptions:Options});
-            },
+            },null,
             'dfn',AccessManager.VIEW,
             this.props.history);
 
@@ -163,7 +163,7 @@ class ifi_dfnManage extends React.Component {
                                 let action=AccessManager.INSERT;
                                 if (this.props.match.params.id > 0)
                                     id = this.props.match.params.id;
-                                const data = new URLSearchParams();
+                                const data = new FormData();
 
                                 data.append('name', this.state.name);
                                 data.append('latinname', this.state.latinname);
@@ -181,7 +181,7 @@ class ifi_dfnManage extends React.Component {
                                     res => {
                                         return this.props.history.push('/ifi/dfns');
                                         //console.log(res);
-                                    },
+                                    },null,
                                     'cmn_dfn',action,
                                     this.props.history);
 

@@ -32,6 +32,9 @@ class Login extends Component {
         };
         let cookies = new Cookies();
         cookies.set('sessionkey', '');
+        cookies.set('userdisplayname', '');
+        cookies.set('userlogintime', '');
+        cookies.set('access', null);
 
     }
 
@@ -76,22 +79,34 @@ class Login extends Component {
                                                         data.append('password', this.state.password);
                                                         data.append('forceLogin', true);
                                                         data.append('appName', 'Panel');
-                                                        new SweetFetcher().Fetch('/USERs/login', 'post', data, data => {
+                                                        new SweetFetcher().Fetch('/users/login', SweetFetcher.METHOD_POST, data, data => {
                                                             console.log(data);
                                                             let cookies = new Cookies();
                                                             // cookies.set(data);
 
                                                             cookies.set('sessionkey', data.Data.sessionkey,{ path: '/' });
+                                                            console.log(cookies.get('sessionkey'));
                                                             cookies.set('userdisplayname', data.Data.displayname,{ path: '/' });
 
                                                             cookies.set('userlogintime', moment().locale('fa').format('HH:mm'),{ path: '/' });
-                                                            cookies.set('access', Common.convertObjectPropertiesToLowerCase(data.Data.access),{ path: '/' });
+                                                            let access=Common.convertObjectPropertiesToLowerCase(data.Data.access);
+                                                            // console.log(access);
+                                                            let key, keys = Object.keys(access);
+                                                            let n = keys.length;
+                                                            while (n--) {
+                                                                key = keys[n];
+                                                                console.log('access.'+access[key].name);
+                                                                cookies.set('access.'+access[key].name,true ,{ path: '/' });
+                                                            }
+                                                            // cookies.set('access',access ,{ path: '/' });
+                                                            // console.log(cookies.get('access'));
+
                                                             if (data.Data.sessionkey.length > 2)
                                                                 this.props.history.push('/');
                                                             else
                                                                 alert("اطلاعات کاربری صحیح نمی باشد.");
 
-                                                        },this.props.history);
+                                                        },null,'users','load',this.props.history);
                                                     }}>ورود</Button>
                                                 </Col>
                                                 <Col xs="6" className="text-right">
@@ -104,8 +119,8 @@ class Login extends Component {
                                     <CardBody className="text-center">
                                         <div>
                                             {/*<img src={Logo} />*/}
-                                            <h2>سامانه حق الزحمه</h2>
-                                            <p>ویرایش 97/09</p>
+                                            <h2>سامانه ارتباطات مردمی</h2>
+                                            <p>ویرایش 97/12</p>
                                         </div>
                                     </CardBody>
                                 </Card>

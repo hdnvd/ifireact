@@ -14,7 +14,7 @@ class ifi_personelManage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            canEdit:AccessManager.UserCan('personel',AccessManager.EDIT),
+            canEdit:AccessManager.UserCan('ifi','personel',AccessManager.EDIT),
 
             personelno:'',
             nationalcode:'',
@@ -38,7 +38,7 @@ class ifi_personelManage extends React.Component {
                     data.Data=Common.convertNullKeysToEmpty(data.Data);
 
                     this.setState({ personelno:data.Data.personelno,nationalcode:data.Data.nationalcode,name:data.Data.name,family:data.Data.family,gender_fid:data.Data.gender,fathername:data.Data.fathername,birth_date:data.Data.birthdate,certificationnumber:data.Data.certificationnumber,birthplace:data.Data.birthplace,nationality_fid:data.Data.nationality,hesabno:data.Data.hesabno,hmeli:data.Data.hmeli,branch:data.Data.branch,});
-                },
+                },null,
                 'personel',AccessManager.VIEW,
                 this.props.history);
         }//IF
@@ -46,14 +46,14 @@ class ifi_personelManage extends React.Component {
             data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({gender_fidOptions:Options});
-            },
+            },null,
             'gender',AccessManager.VIEW,
             this.props.history);
         new SweetFetcher().Fetch('/dfn?pid=30',SweetFetcher.METHOD_GET,null,
             data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({nationality_fidOptions:Options});
-            },
+            },null,
             'nationality',AccessManager.VIEW,
             this.props.history);
 
@@ -282,7 +282,7 @@ class ifi_personelManage extends React.Component {
                                     res => {
                                         return this.props.history.push('/ifi/personels');
                                         //console.log(res);
-                                    },
+                                    },null,
                                     'personel',action,
                                     this.props.history);
 

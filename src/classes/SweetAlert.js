@@ -24,6 +24,25 @@ class SweetAlert{
         };
         confirmAlert(options);
     }
+    static displaySimpleAlert(Title,Text)
+    {
+        let options = {
+            title: Title,
+            message: Text,
+            childrenElement: () => <div />,
+            customUI: ({ title, message, onClose }) => {
+                return (
+                    <div className='sweetalert'>
+                        <h1>{title}</h1>
+                        <p>{message}</p>
+                        <button className='cancelbutton' onClick={onClose}>بستن</button>
+                    </div>
+                )
+            },
+            willUnmount: () => {}
+        };
+        confirmAlert(options);
+    }
     static displayDeleteAlert(OnConfirmHandler)
     {
         let options = {

@@ -20,8 +20,8 @@ class ifi_personelList extends SweetComponent {
             data: [],
             pages:1,
             page:0,
-            canEdit:AccessManager.UserCan('personel',AccessManager.EDIT),
-            canDelete:AccessManager.UserCan('personel',AccessManager.DELETE),
+            canEdit:AccessManager.UserCan('ifi','personel',AccessManager.EDIT),
+            canDelete:AccessManager.UserCan('ifi','personel',AccessManager.DELETE),
         };
     };
     componentDidMount() {
@@ -39,7 +39,7 @@ class ifi_personelList extends SweetComponent {
                     data.Data[i]=Common.convertNullKeysToEmpty(data.Data[i]);
                 console.log(data.Data);
                 this.setState({data: data.Data,pages:Pages})
-            },
+            },null,
             'personel',AccessManager.VIEW,
             this.props.history);
     };
@@ -107,7 +107,7 @@ class ifi_personelList extends SweetComponent {
                             new SweetFetcher().Fetch('/personel/' + props.value, SweetFetcher.METHOD_DELETE, null,
                                 data => {
                                     this.LoadData(Constants.DefaultPageSize,this.state.page+1,null,null);
-                                },
+                                },null,
                                 'personel',AccessManager.DELETE,this.props.history);
                         });
                     }

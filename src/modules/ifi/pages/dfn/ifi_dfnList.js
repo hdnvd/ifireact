@@ -24,8 +24,8 @@ class ifi_dfnList extends React.Component {
             data: [],
             subdata: [],
             pages: 1,
-            canEdit:AccessManager.UserCan('cmn_dfn',AccessManager.EDIT),
-            canDelete:AccessManager.UserCan('cmn_dfn',AccessManager.DELETE),
+            canEdit:AccessManager.UserCan('ifi','cmn_dfn',AccessManager.EDIT),
+            canDelete:AccessManager.UserCan('ifi','cmn_dfn',AccessManager.DELETE),
         };
     };
 
@@ -54,7 +54,7 @@ class ifi_dfnList extends React.Component {
                                     new SweetFetcher().Fetch('/dfn/' + dt[i].id, SweetFetcher.METHOD_DELETE, null,
                                         data => {
                                             this.LoadData(Constants.DefaultPageSize, this.state.page + 1, null, null);
-                                        },
+                                        },null,
                                         'cmn.dfn', AccessManager.DELETE, this.props.history);
                                 });
                             }
@@ -85,7 +85,7 @@ class ifi_dfnList extends React.Component {
                 let Tree=this.GetData(-1,pageSize,page,sorted,filtered);
                 this.setState({treeData:Tree});
 
-            },'dfn','view',
+            },null,'dfn','view',
             this.props.history);
         // console.log(data);
         // this.setState({treeData:data});
