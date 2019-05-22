@@ -89,12 +89,12 @@ body
 .viewlink
 {
 
-  color:green;
+  color:#2dbbad;
 }
 .addlink
 {
 
-  color:green;
+  color:#2dbbad;
   font-size: 50px;
   display: block;
   float: left;
@@ -241,4 +241,51 @@ direction: rtl;
   width: 100%;
   text-align: center;
   background: #ffffff;
+}
+.modal-header
+{
+  direction: ltr;
+}
+.modal-title
+{
+  width: 100%;
+}
+.searchcontainer
+{
+  margin: 0;
+  padding: 0;
+}
+.smallvaluelable
+{
+  display: initial;
+}
+.bigoperationsrow button
+{
+  width: 100px;
+  height: 100px;
+}
+.form-group .smallform-group
+{
+  width: 50%;
+  float: right;
+}
+.sasmessage
+{
+  text-align: right;
+  padding: 10px;
+}
+.sasmessagetitle
+{
+  text-align: right;
+  background: #2dbbad;
+  padding: 10px;
+  color: #fff;
+  border-radius: 10px 10px 0 0;
+}
+.sasmessagebar
+{
+  text-align: right;
+  background: #fff;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }

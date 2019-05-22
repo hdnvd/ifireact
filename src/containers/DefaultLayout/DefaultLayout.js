@@ -16,23 +16,43 @@ import {
 } from '@coreui/react';
 // sidebar nav config
 import navigation from '../../_nav';
+import navigation2 from '../../_nav2';
 import header from '../../assets/img/header.png'
 // routes config
 import routes from '../../routes';
 import AccessManager from "../../classes/AccessManager";
 import SweetFetcher from "../../classes/sweet-fetcher";
+import Cookies from "universal-cookie";
 
 const DefaultAside = React.lazy(() => import('./DefaultAside'));
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 class DefaultLayout extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoggedIn: false,
+            loginTime:0,
+        };
+        let cookies = new Cookies();
+        cookies.addChangeListener((name,value,options)=>{
+             alert(name.name);
+            if(name.name=='userlogintime')
+            {
+                alert("userlogintimeOK");
+            }
+        });
+        // cookies.set("userlogintime",'11');
+    };
 
   loading = () => <div className="animated fadeIn pt-1 text-center">در حال بارگذاری...</div>
 
   signOut(e) {
-    e.preventDefault()
-    this.props.history.push('/login')
+    e.preventDefault();
+
+      this.setState({isLoggedIn:false,loginTime:0});
+      this.props.history.push('/login');
   }
 
   render() {
@@ -40,6 +60,7 @@ class DefaultLayout extends Component {
       //     this.props.history.push('/login');
       new SweetFetcher().Fetch('/users/current',SweetFetcher.METHOD_GET,null,()=>{},null,'cmn_dfn',AccessManager.VIEW,this.props.history);
     return (
+
       <div className="app">
 
           {/*<div className={'headerimagediv'} >*/}
@@ -54,7 +75,7 @@ class DefaultLayout extends Component {
             <AppSidebarHeader />
             <AppSidebarForm />
             <Suspense>
-            <AppSidebarNav navConfig={navigation} {...this.props} />
+            <AppSidebarNav loginTime={this.state.loginTime} navConfig={AccessManager.UserIsLoggedIn()?navigation:navigation2} {...this.props} />
             </Suspense>
             <AppSidebarFooter />
             <AppSidebarMinimizer />

@@ -108,6 +108,8 @@ class SweetFetcher {
                             history.push('/login');
                         if(status.toString().trim()==="405")
                             SweetAlert.displayAccessDeniedAlert();
+                        if(status.toString().trim()==="429")
+                            SweetAlert.displaySimpleAlert("خطای محافظت امنیتی",'تعداد درخواست های شما بیش از حد مجاز است و به دلایل امنیتی دسترسی شما تا چند دقیقه بعد مسدود شد. لطفا چند دقیقه دیگر مراجعه نمایید');
                     }
                 }
 

@@ -30,15 +30,30 @@ class Login extends Component {
             username: '',
             password: '',
         };
-        let cookies = new Cookies();
-        cookies.set('sessionkey', '');
-        cookies.set('userdisplayname', '');
-        cookies.set('userlogintime', '');
-        cookies.set('access', null);
+        // let cookies = new Cookies();
+        // cookies.set('sessionkey', '');
+        // cookies.set('userdisplayname', '');
+        // cookies.set('userlogintime', '');
+        // cookies.set('access', null);
+        // Common.clearAllCookies();
 
     }
 
     render() {
+        let cookies = new Cookies();
+        // alert(cookies.get('redirecting'));
+        if(cookies.get('redirecting')==='1')
+        {
+            // alert('redirecting');
+            cookies.set('redirecting','0');
+            this.props.history.push('/');
+        }
+        else
+        {
+
+            if(cookies.get('sessionkey')!=null)
+                Common.clearAllCookies();
+        }
         return (
             <div className="app flex-row align-items-center">
                 <Container>
@@ -79,14 +94,15 @@ class Login extends Component {
                                                         data.append('password', this.state.password);
                                                         data.append('forceLogin', true);
                                                         data.append('appName', 'Panel');
+                                                        Common.clearAllCookies();
                                                         new SweetFetcher().Fetch('/users/login', SweetFetcher.METHOD_POST, data, data => {
                                                             console.log(data);
                                                             let cookies = new Cookies();
                                                             // cookies.set(data);
-
                                                             cookies.set('sessionkey', data.Data.sessionkey,{ path: '/' });
                                                             console.log(cookies.get('sessionkey'));
                                                             cookies.set('userdisplayname', data.Data.displayname,{ path: '/' });
+                                                            cookies.set('userroles', data.Data.roles,{ path: '/' });
 
                                                             cookies.set('userlogintime', moment().locale('fa').format('HH:mm'),{ path: '/' });
                                                             let access=Common.convertObjectPropertiesToLowerCase(data.Data.access);
@@ -100,9 +116,12 @@ class Login extends Component {
                                                             }
                                                             // cookies.set('access',access ,{ path: '/' });
                                                             // console.log(cookies.get('access'));
-
                                                             if (data.Data.sessionkey.length > 2)
-                                                                this.props.history.push('/');
+                                                            {
+                                                                window.location.reload();
+                                                                cookies.set('redirecting', '1',{ path: '/' });
+
+                                                            }
                                                             else
                                                                 alert("اطلاعات کاربری صحیح نمی باشد.");
 
@@ -119,8 +138,9 @@ class Login extends Component {
                                     <CardBody className="text-center">
                                         <div>
                                             {/*<img src={Logo} />*/}
-                                            <h2>سامانه ارتباطات مردمی</h2>
-                                            <p>ویرایش 97/12</p>
+                                            {/*<h2>سامانه ارتباط با کارکنان عقیدتی و سیاسی قرارگاه خاتم الانبیاء</h2>*/}
+                                            <h2>سامانه اتوماسیون خدمات فاوایی قرارگاه خاتم الانبیاء</h2>
+                                            <p>ویرایش 98/1</p>
                                         </div>
                                     </CardBody>
                                 </Card>

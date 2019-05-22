@@ -10,26 +10,25 @@ import SweetFetcher from '../../../../classes/sweet-fetcher';
 import SweetAlert from '../../../../classes/SweetAlert';
 import Constants from '../../../../classes/Constants';
 import AccessManager from '../../../../classes/AccessManager';
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
+import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter,FormInline, Input } from 'mdbreact';
 import Common from '../../../../classes/Common';
 import SweetComponent from '../../../../classes/sweet-component';
 
-class contactus_subjectList extends SweetComponent {
+class sas_unittypeList extends SweetComponent {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
             pages:1,
             page:0,
-            canEdit:AccessManager.UserCan('contactus','subject',AccessManager.EDIT),
-            canDelete:AccessManager.UserCan('contactus','subject',AccessManager.DELETE),
+            canEdit:AccessManager.UserCan('sas','unittype',AccessManager.EDIT),
+            canDelete:AccessManager.UserCan('sas','unittype',AccessManager.DELETE),
             displaySearchWindow:false,
             
         };
     };
     searchParams={};
     toggleSearchWindow = () => {
-        console.log("Toggling");
         this.setState({
             displaySearchWindow: !this.state.displaySearchWindow
         });
@@ -41,7 +40,7 @@ class contactus_subjectList extends SweetComponent {
     {
         let filterString=this.HttpGetParamsFromArray(filtered);
         if(filterString!='') filterString='&'+filterString;
-        let url='/contactus/subject?pg='+page+filterString;
+        let url='/sas/unittype?pg='+page+filterString;
         new SweetFetcher().Fetch(url, SweetFetcher.METHOD_GET, null, 
         data => {
             let Pages=Math.ceil(data.RecordCount/Constants.DefaultPageSize);
@@ -49,8 +48,9 @@ class contactus_subjectList extends SweetComponent {
                     data.Data[i]=Common.convertNullKeysToEmpty(data.Data[i]);
             this.setState({data: data.Data,pages:Pages})
         }, 
-        null,'contactus.subject',AccessManager.LIST,
+        null,'sas.unittype',AccessManager.LIST,
         this.props.history);
+        
     };
     searchData=()=>
     {
@@ -65,7 +65,7 @@ class contactus_subjectList extends SweetComponent {
                 <MDBModal isOpen={this.state.displaySearchWindow} toggle={this.toggleSearchWindow}>
                     <MDBModalHeader toggle={this.toggleSearchWindow}>جستجو</MDBModalHeader>
                     <MDBModalBody>
-
+                        
                         <div className='form-group'>
                             <label htmlFor='name'>نام</label>
                             <input
@@ -81,7 +81,7 @@ class contactus_subjectList extends SweetComponent {
                     </MDBModalFooter>
                 </MDBModal>
             </MDBContainer>
-            <div className={'topoperationsrow'}><Link className={'addlink'}  to={'/contactus/subjects/management'}><IoMdAddCircle/></Link></div>
+            <div className={'topoperationsrow'}><Link className={'addlink'}  to={'/sas/unittypes/management'}><IoMdAddCircle/></Link></div>
         <SweetTable
             filterable={false}
             className='-striped -highlight'
@@ -109,22 +109,22 @@ columns = [
     accessor: 'id',
     Cell: props => <div className={'operationsrow'}>
                    {!this.state.canEdit &&
-                    <Link className={'viewlink'}  to={'/contactus/subjects/management/'+props.value}><IoMdEye/></Link>
+                    <Link className={'viewlink'}  to={'/sas/unittypes/view/'+props.value}><IoMdEye/></Link>
                    }
                    {this.state.canEdit &&
-                    <Link className={'editlink'}  to={'/contactus/subjects/management/'+props.value}><FaEdit/></Link>
+                    <Link className={'editlink'}  to={'/sas/unittypes/management/'+props.value}><FaEdit/></Link>
                    }
                    {this.state.canDelete &&
                        <MdDeleteForever onClick={ 
                        () =>{
                          SweetAlert.displayDeleteAlert(()=>{
-                            new SweetFetcher().Fetch('/contactus/subject/' + props.value, SweetFetcher.METHOD_DELETE, null,
+                            new SweetFetcher().Fetch('/sas/unittype/' + props.value, SweetFetcher.METHOD_DELETE, null,
                                 data => {
                                     this.LoadData(Constants.DefaultPageSize,this.state.page+1,null,null);
                                 },(error)=>{
                                             let status=error.response.status;
                                             SweetAlert.displaySimpleAlert('خطای پیش بینی نشده ','خطایی در حذف اطلاعات به وجود آمد'+status.toString().trim());
-                                        },'contactus.subject',AccessManager.DELETE,this.props.history);
+                                        },'sas.unittype',AccessManager.DELETE,this.props.history);
                          });
                         }
                         }/>
@@ -132,4 +132,4 @@ columns = [
                 </div>,
 },];
         }
-export default contactus_subjectList;
+export default sas_unittypeList;

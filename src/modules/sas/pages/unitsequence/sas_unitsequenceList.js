@@ -10,26 +10,27 @@ import SweetFetcher from '../../../../classes/sweet-fetcher';
 import SweetAlert from '../../../../classes/SweetAlert';
 import Constants from '../../../../classes/Constants';
 import AccessManager from '../../../../classes/AccessManager';
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
+import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter,FormInline, Input } from 'mdbreact';
 import Common from '../../../../classes/Common';
 import SweetComponent from '../../../../classes/sweet-component';
 
-class contactus_subjectList extends SweetComponent {
+class sas_unitsequenceList extends SweetComponent {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
             pages:1,
             page:0,
-            canEdit:AccessManager.UserCan('contactus','subject',AccessManager.EDIT),
-            canDelete:AccessManager.UserCan('contactus','subject',AccessManager.DELETE),
+            canEdit:AccessManager.UserCan('sas','unitsequence',AccessManager.EDIT),
+            canDelete:AccessManager.UserCan('sas','unitsequence',AccessManager.DELETE),
             displaySearchWindow:false,
             
+            sourceunitOptions:[],
+            destinationunitOptions:[],
         };
     };
     searchParams={};
     toggleSearchWindow = () => {
-        console.log("Toggling");
         this.setState({
             displaySearchWindow: !this.state.displaySearchWindow
         });
@@ -41,7 +42,7 @@ class contactus_subjectList extends SweetComponent {
     {
         let filterString=this.HttpGetParamsFromArray(filtered);
         if(filterString!='') filterString='&'+filterString;
-        let url='/contactus/subject?pg='+page+filterString;
+        let url='/sas/unitsequence?pg='+page+filterString;
         new SweetFetcher().Fetch(url, SweetFetcher.METHOD_GET, null, 
         data => {
             let Pages=Math.ceil(data.RecordCount/Constants.DefaultPageSize);
@@ -49,8 +50,23 @@ class contactus_subjectList extends SweetComponent {
                     data.Data[i]=Common.convertNullKeysToEmpty(data.Data[i]);
             this.setState({data: data.Data,pages:Pages})
         }, 
-        null,'contactus.subject',AccessManager.LIST,
+        null,'sas.unitsequence',AccessManager.LIST,
         this.props.history);
+        
+new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
+                data=>{
+                let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
+                this.setState({sourceunitOptions:Options});
+            }, 
+            null,'sas.unit',AccessManager.LIST,
+            this.props.history);
+new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
+                data=>{
+                let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
+                this.setState({destinationunitOptions:Options});
+            }, 
+            null,'sas.unit',AccessManager.LIST,
+            this.props.history);
     };
     searchData=()=>
     {
@@ -65,15 +81,27 @@ class contactus_subjectList extends SweetComponent {
                 <MDBModal isOpen={this.state.displaySearchWindow} toggle={this.toggleSearchWindow}>
                     <MDBModalHeader toggle={this.toggleSearchWindow}>جستجو</MDBModalHeader>
                     <MDBModalBody>
-
-                        <div className='form-group'>
-                            <label htmlFor='name'>نام</label>
-                            <input
-                                className='form-control'
-                                id='name'
-                                type='text'
-                                onChange={(event)=>{this.searchParams.name=event.target.value;}}/>
-                        </div>
+                        
+                    <div className='form-group'>
+                        <label htmlFor='sourceunit'>بخش مبدا</label>
+                        <select 
+                                id='sourceunit'
+                                className='browser-default custom-select'
+                                onChange={(event)=>{this.searchParams.sourceunit=event.target.value;}}>
+                                <option value={''}>همه</option>
+                                {this.state.sourceunitOptions}
+                            </select>
+                            </div>
+                    <div className='form-group'>
+                        <label htmlFor='destinationunit'>بخش مقصد(بعدی)</label>
+                        <select 
+                                id='destinationunit'
+                                className='browser-default custom-select'
+                                onChange={(event)=>{this.searchParams.destinationunit=event.target.value;}}>
+                                <option value={''}>همه</option>
+                                {this.state.destinationunitOptions}
+                            </select>
+                            </div>
                     </MDBModalBody>
                     <MDBModalFooter>
                         <MDBBtn color='secondary' onClick={this.toggleSearchWindow}>بستن</MDBBtn>
@@ -81,7 +109,7 @@ class contactus_subjectList extends SweetComponent {
                     </MDBModalFooter>
                 </MDBModal>
             </MDBContainer>
-            <div className={'topoperationsrow'}><Link className={'addlink'}  to={'/contactus/subjects/management'}><IoMdAddCircle/></Link></div>
+            <div className={'topoperationsrow'}><Link className={'addlink'}  to={'/sas/unitsequences/management'}><IoMdAddCircle/></Link></div>
         <SweetTable
             filterable={false}
             className='-striped -highlight'
@@ -101,30 +129,34 @@ class contactus_subjectList extends SweetComponent {
 
 columns = [
 {
-    Header: 'نام',
-    accessor: 'name'
+    Header: 'بخش مبدا',
+    accessor: 'sourceunitcontent'
+},
+{
+    Header: 'بخش مقصد(بعدی)',
+    accessor: 'destinationunitcontent'
 },
 {
     Header: 'عملیات',
     accessor: 'id',
     Cell: props => <div className={'operationsrow'}>
                    {!this.state.canEdit &&
-                    <Link className={'viewlink'}  to={'/contactus/subjects/management/'+props.value}><IoMdEye/></Link>
+                    <Link className={'viewlink'}  to={'/sas/unitsequences/management/'+props.value}><IoMdEye/></Link>
                    }
                    {this.state.canEdit &&
-                    <Link className={'editlink'}  to={'/contactus/subjects/management/'+props.value}><FaEdit/></Link>
+                    <Link className={'editlink'}  to={'/sas/unitsequences/management/'+props.value}><FaEdit/></Link>
                    }
                    {this.state.canDelete &&
                        <MdDeleteForever onClick={ 
                        () =>{
                          SweetAlert.displayDeleteAlert(()=>{
-                            new SweetFetcher().Fetch('/contactus/subject/' + props.value, SweetFetcher.METHOD_DELETE, null,
+                            new SweetFetcher().Fetch('/sas/unitsequence/' + props.value, SweetFetcher.METHOD_DELETE, null,
                                 data => {
                                     this.LoadData(Constants.DefaultPageSize,this.state.page+1,null,null);
                                 },(error)=>{
                                             let status=error.response.status;
                                             SweetAlert.displaySimpleAlert('خطای پیش بینی نشده ','خطایی در حذف اطلاعات به وجود آمد'+status.toString().trim());
-                                        },'contactus.subject',AccessManager.DELETE,this.props.history);
+                                        },'sas.unitsequence',AccessManager.DELETE,this.props.history);
                          });
                         }
                         }/>
@@ -132,4 +164,4 @@ columns = [
                 </div>,
 },];
         }
-export default contactus_subjectList;
+export default sas_unitsequenceList;

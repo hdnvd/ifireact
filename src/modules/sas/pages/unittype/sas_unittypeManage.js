@@ -14,32 +14,37 @@ import ModalImage from 'react-modal-image'
 import SweetButton from '../../../../classes/sweet-button';
 import SweetAlert from '../../../../classes/SweetAlert';
 
-class contactus_subjectManage extends SweetComponent {
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+class sas_unittypeManage extends SweetComponent {
     constructor(props) {
         super(props);
         this.state = {
-                canEdit:AccessManager.UserCan('contactus','subject',AccessManager.EDIT),
+                canEdit:AccessManager.UserCan('sas','unittype',this.props.match.params.id>0?AccessManager.EDIT:AccessManager.INSERT),
             
 			name:'',
         };
         if(this.props.match.params.id>0){
-        new SweetFetcher().Fetch('/contactus/subject/'+this.props.match.params.id, SweetFetcher.METHOD_GET,null, 
+        new SweetFetcher().Fetch('/sas/unittype/'+this.props.match.params.id, SweetFetcher.METHOD_GET,null, 
         data => {
             data.Data=Common.convertNullKeysToEmpty(data.Data);
             
                  this.setState({ name:data.Data.name,});
             }, 
-            null,'contactus.subject',AccessManager.VIEW,
+            null,'sas.unittype',AccessManager.VIEW,
             this.props.history);
         }//IF
         
     }
+    editorConfiguration = {
+        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList'],
+    };
     render(){
         return <MDBContainer>
             <MDBRow>
                 <MDBCol md='6'>
                     <form>
-                        <p className='h5 text-center mb-4'>تعریف موضوع</p>
+                        <p className='h5 text-center mb-4'>تعریف نوع بخش</p>
                         
                         <div className='form-group'>
                             <label htmlFor='name'>نام</label>
@@ -72,9 +77,9 @@ class contactus_subjectManage extends SweetComponent {
 									action=AccessManager.EDIT;
 										data.append('id', id);
 								}
-                                    new SweetFetcher().Fetch('/contactus/subject'+Separator+id,method,data, 
+                                    new SweetFetcher().Fetch('/sas/unittype'+Separator+id,method,data, 
                                     res => {
-                                                return this.props.history.push('/contactus/subjects');
+                                                return this.props.history.push('/sas/unittypes');
                                                 //console.log(res);
                                         },(error)=>{
                                             let status=error.response.status;
@@ -82,7 +87,7 @@ class contactus_subjectManage extends SweetComponent {
                                             SweetAlert.displaySimpleAlert('خطای پیش بینی نشده','خطایی در ذخیره اطلاعات به وجود آمد'+status.toString().trim());
 
                                         },
-                                        'contactus.subject',action,
+                                        'sas.unittype',action,
                                         this.props.history);
                                     
                                 }
@@ -91,7 +96,7 @@ class contactus_subjectManage extends SweetComponent {
                             }
                             <MDBBtn onClick={() =>
                              {
-                                this.props.history.push('/contactus/subjects');
+                                this.props.history.push('/sas/unittypes');
                              }
                             }>برگشت</MDBBtn>
                         </div>
@@ -102,4 +107,4 @@ class contactus_subjectManage extends SweetComponent {
     }
 }
 
-export default contactus_subjectManage;
+export default sas_unittypeManage;

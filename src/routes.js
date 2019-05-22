@@ -134,4 +134,127 @@ const contactus_AnsweredMessageList = React.lazy(() => import('./modules/contact
 const contactus_NotAnsweredMessageList = React.lazy(() => import('./modules/contactus/pages/message/contactus_NotAnsweredMessageList'));
 routes.push({ path: '/contactus/messages/answered',exact:false, name: 'پیام های ورودی',component:contactus_AnsweredMessageList});
 routes.push({ path: '/contactus/messages/notanswered',exact:false, name: 'پیام های بایگانی شده',component:contactus_NotAnsweredMessageList});
+
+const posts_postList = React.lazy(() => import('./modules/posts/pages/post/posts_postList'));
+routes.push({ path: '/posts/posts',exact:true, name: 'لیست مطلب',component:posts_postList});
+const posts_postManage = React.lazy(() => import('./modules/posts/pages/post/posts_postManage'));
+const posts_postView = React.lazy(() => import('./modules/posts/pages/post/posts_postView'));
+routes.push({ path: '/posts/posts/management/:id',exact:false, name: 'ویرایش مطلب',component:posts_postManage});
+routes.push({ path: '/posts/posts/management',exact:false, name: 'تعریف مطلب',component:posts_postManage});
+routes.push({ path: '/posts/posts/view/:id',exact:false, name: 'مطلب',component:posts_postView});
+
+
+
+
+
+//******************************************/
+const sas_unitList = React.lazy(() => import('./modules/sas/pages/unit/sas_unitList'));
+routes.push({ path: '/sas/units',exact:true, name: 'لیست بخش',component:sas_unitList});
+const sas_unitManage = React.lazy(() => import('./modules/sas/pages/unit/sas_unitManage'));
+const sas_unitView = React.lazy(() => import('./modules/sas/pages/unit/sas_unitView'));
+routes.push({ path: '/sas/units/management/:id',exact:false, name: 'ویرایش بخش',component:sas_unitManage});
+routes.push({ path: '/sas/units/management',exact:false, name: 'تعریف بخش',component:sas_unitManage});
+routes.push({ path: '/sas/units/view/:id',exact:false, name: 'بخش',component:sas_unitView});
+
+
+const sas_requestList = React.lazy(() => import('./modules/sas/pages/request/sas_requestList'));
+const sas_inbox = React.lazy(() => import('./modules/sas/pages/request/sas_inbox'));
+const sas_outbox = React.lazy(() => import('./modules/sas/pages/request/sas_outbox'));
+const sas_currentbox = React.lazy(() => import('./modules/sas/pages/request/sas_currentbox'));
+const sas_approve = React.lazy(() => import('./modules/sas/pages/request/sas_approve'));
+routes.push({ path: '/sas/requests',exact:true, name: 'لیست درخواست',component:sas_requestList});
+routes.push({ path: '/sas/inbox',exact:true, name: 'پیام های دریافتی',component:sas_inbox});
+routes.push({ path: '/sas/outbox',exact:true, name: 'پیام های ارسال شده',component:sas_outbox});
+routes.push({ path: '/sas/current',exact:true, name: 'پیام های موجود',component:sas_currentbox});
+routes.push({ path: '/sas/approve',exact:true, name: 'پیام های منتظر تایید',component:sas_approve});
+const sas_requestManage = React.lazy(() => import('./modules/sas/pages/request/sas_requestManage'));
+const sas_requestView = React.lazy(() => import('./modules/sas/pages/request/sas_requestView'));
+routes.push({ path: '/sas/requests/management/:id',exact:false, name: 'ویرایش درخواست',component:sas_requestManage});
+routes.push({ path: '/sas/requests/management',exact:false, name: 'تعریف درخواست',component:sas_requestManage});
+routes.push({ path: '/sas/requests/view/:id',exact:false, name: 'درخواست',component:sas_requestView});
+
+
+
+const sas_deviceList = React.lazy(() => import('./modules/sas/pages/device/sas_deviceList'));
+routes.push({ path: '/sas/devices',exact:true, name: 'لیست تجهیز',component:sas_deviceList});
+const sas_deviceManage = React.lazy(() => import('./modules/sas/pages/device/sas_deviceManage'));
+const sas_deviceView = React.lazy(() => import('./modules/sas/pages/device/sas_deviceView'));
+routes.push({ path: '/sas/devices/management/:id',exact:false, name: 'ویرایش تجهیز',component:sas_deviceManage});
+routes.push({ path: '/sas/devices/management',exact:false, name: 'تعریف تجهیز',component:sas_deviceManage});
+routes.push({ path: '/sas/devices/view/:id',exact:false, name: 'تجهیز',component:sas_deviceView});
+
+
+const sas_devicetypeList = React.lazy(() => import('./modules/sas/pages/devicetype/sas_devicetypeList'));
+routes.push({ path: '/sas/devicetypes',exact:true, name: 'لیست نوع سخت افزار',component:sas_devicetypeList});
+const sas_devicetypeManage = React.lazy(() => import('./modules/sas/pages/devicetype/sas_devicetypeManage'));
+const sas_devicetypeView = React.lazy(() => import('./modules/sas/pages/devicetype/sas_devicetypeView'));
+routes.push({ path: '/sas/devicetypes/management/:id',exact:false, name: 'ویرایش نوع سخت افزار',component:sas_devicetypeManage});
+routes.push({ path: '/sas/devicetypes/management',exact:false, name: 'تعریف نوع سخت افزار',component:sas_devicetypeManage});
+routes.push({ path: '/sas/devicetypes/view/:id',exact:false, name: 'نوع سخت افزار',component:sas_devicetypeView});
+
+
+const sas_unitsequenceList = React.lazy(() => import('./modules/sas/pages/unitsequence/sas_unitsequenceList'));
+routes.push({ path: '/sas/unitsequences',exact:true, name: 'لیست unitsequence',component:sas_unitsequenceList});
+const sas_unitsequenceManage = React.lazy(() => import('./modules/sas/pages/unitsequence/sas_unitsequenceManage'));
+const sas_unitsequenceView = React.lazy(() => import('./modules/sas/pages/unitsequence/sas_unitsequenceView'));
+routes.push({ path: '/sas/unitsequences/management/:id',exact:false, name: 'ویرایش unitsequence',component:sas_unitsequenceManage});
+routes.push({ path: '/sas/unitsequences/management',exact:false, name: 'تعریف unitsequence',component:sas_unitsequenceManage});
+routes.push({ path: '/sas/unitsequences/view/:id',exact:false, name: 'unitsequence',component:sas_unitsequenceView});
+
+
+const sas_statusList = React.lazy(() => import('./modules/sas/pages/status/sas_statusList'));
+routes.push({ path: '/sas/statuss',exact:true, name: 'لیست وضعیت',component:sas_statusList});
+const sas_statusManage = React.lazy(() => import('./modules/sas/pages/status/sas_statusManage'));
+const sas_statusView = React.lazy(() => import('./modules/sas/pages/status/sas_statusView'));
+routes.push({ path: '/sas/statuss/management/:id',exact:false, name: 'ویرایش وضعیت',component:sas_statusManage});
+routes.push({ path: '/sas/statuss/management',exact:false, name: 'تعریف وضعیت',component:sas_statusManage});
+routes.push({ path: '/sas/statuss/view/:id',exact:false, name: 'وضعیت',component:sas_statusView});
+
+
+const sas_requeststatustrackList = React.lazy(() => import('./modules/sas/pages/requeststatustrack/sas_requeststatustrackList'));
+routes.push({ path: '/sas/requeststatustracks',exact:true, name: 'لیست requeststatustrack',component:sas_requeststatustrackList});
+const sas_requeststatustrackManage = React.lazy(() => import('./modules/sas/pages/requeststatustrack/sas_requeststatustrackManage'));
+const sas_requeststatustrackView = React.lazy(() => import('./modules/sas/pages/requeststatustrack/sas_requeststatustrackView'));
+routes.push({ path: '/sas/requeststatustracks/management/:id',exact:false, name: 'ویرایش requeststatustrack',component:sas_requeststatustrackManage});
+routes.push({ path: '/sas/requeststatustracks/management',exact:false, name: 'تعریف requeststatustrack',component:sas_requeststatustrackManage});
+routes.push({ path: '/sas/requeststatustracks/view/:id',exact:false, name: 'requeststatustrack',component:sas_requeststatustrackView});
+
+
+const sas_requestunittrackList = React.lazy(() => import('./modules/sas/pages/requestunittrack/sas_requestunittrackList'));
+routes.push({ path: '/sas/requestunittracks',exact:true, name: 'لیست requestunittrack',component:sas_requestunittrackList});
+const sas_requestunittrackManage = React.lazy(() => import('./modules/sas/pages/requestunittrack/sas_requestunittrackManage'));
+const sas_requestunittrackView = React.lazy(() => import('./modules/sas/pages/requestunittrack/sas_requestunittrackView'));
+routes.push({ path: '/sas/requestunittracks/management/:id',exact:false, name: 'ویرایش requestunittrack',component:sas_requestunittrackManage});
+routes.push({ path: '/sas/requestunittracks/management',exact:false, name: 'تعریف requestunittrack',component:sas_requestunittrackManage});
+routes.push({ path: '/sas/requestunittracks/view/:id',exact:false, name: 'requestunittrack',component:sas_requestunittrackView});
+
+
+const sas_requesttypeList = React.lazy(() => import('./modules/sas/pages/requesttype/sas_requesttypeList'));
+routes.push({ path: '/sas/requesttypes',exact:true, name: 'لیست نوع درخواست',component:sas_requesttypeList});
+const sas_requesttypeManage = React.lazy(() => import('./modules/sas/pages/requesttype/sas_requesttypeManage'));
+const sas_requesttypeView = React.lazy(() => import('./modules/sas/pages/requesttype/sas_requesttypeView'));
+routes.push({ path: '/sas/requesttypes/management/:id',exact:false, name: 'ویرایش نوع درخواست',component:sas_requesttypeManage});
+routes.push({ path: '/sas/requesttypes/management',exact:false, name: 'تعریف نوع درخواست',component:sas_requesttypeManage});
+routes.push({ path: '/sas/requesttypes/view/:id',exact:false, name: 'نوع درخواست',component:sas_requesttypeView});
+
+
+const sas_requestmessageList = React.lazy(() => import('./modules/sas/pages/requestmessage/sas_requestmessageList'));
+routes.push({ path: '/sas/requestmessages',exact:true, name: 'لیست requestmessage',component:sas_requestmessageList});
+const sas_requestmessageManage = React.lazy(() => import('./modules/sas/pages/requestmessage/sas_requestmessageManage'));
+const sas_requestmessageView = React.lazy(() => import('./modules/sas/pages/requestmessage/sas_requestmessageView'));
+routes.push({ path: '/sas/requestmessages/management/:id',exact:false, name: 'ویرایش requestmessage',component:sas_requestmessageManage});
+routes.push({ path: '/sas/requestmessages/management',exact:false, name: 'تعریف requestmessage',component:sas_requestmessageManage});
+routes.push({ path: '/sas/requestmessages/view/:id',exact:false, name: 'requestmessage',component:sas_requestmessageView});
+/**************************************/
+
+
+const sas_unittypeList = React.lazy(() => import('./modules/sas/pages/unittype/sas_unittypeList'));
+const sas_Dashboard = React.lazy(() => import('./modules/sas/pages/request/sas_dashboard'));
+routes.push({ path: '/',exact:true, name: 'صفحه اصلی',component:sas_Dashboard});
+routes.push({ path: '/sas/unittypes',exact:true, name: 'لیست نوع بخش',component:sas_unittypeList});
+const sas_unittypeManage = React.lazy(() => import('./modules/sas/pages/unittype/sas_unittypeManage'));
+const sas_unittypeView = React.lazy(() => import('./modules/sas/pages/unittype/sas_unittypeView'));
+routes.push({ path: '/sas/unittypes/management/:id',exact:false, name: 'ویرایش نوع بخش',component:sas_unittypeManage});
+routes.push({ path: '/sas/unittypes/management',exact:false, name: 'تعریف نوع بخش',component:sas_unittypeManage});
+routes.push({ path: '/sas/unittypes/view/:id',exact:false, name: 'نوع بخش',component:sas_unittypeView});
 export default routes;

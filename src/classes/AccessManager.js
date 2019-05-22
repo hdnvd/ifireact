@@ -53,6 +53,12 @@ class AccessManager{
         }
 
     }
+    static getUserRoles()
+    {
+        let cookies = new Cookies();
+        let roles= cookies.get('userroles');
+        return roles==null?[]:roles;
+    }
     static UserIsLoggedIn()
     {
         let cookies = new Cookies();

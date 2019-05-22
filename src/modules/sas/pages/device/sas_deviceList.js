@@ -10,26 +10,27 @@ import SweetFetcher from '../../../../classes/sweet-fetcher';
 import SweetAlert from '../../../../classes/SweetAlert';
 import Constants from '../../../../classes/Constants';
 import AccessManager from '../../../../classes/AccessManager';
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
+import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter,FormInline, Input } from 'mdbreact';
 import Common from '../../../../classes/Common';
 import SweetComponent from '../../../../classes/sweet-component';
 
-class contactus_subjectList extends SweetComponent {
+class sas_deviceList extends SweetComponent {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
             pages:1,
             page:0,
-            canEdit:AccessManager.UserCan('contactus','subject',AccessManager.EDIT),
-            canDelete:AccessManager.UserCan('contactus','subject',AccessManager.DELETE),
+            canEdit:AccessManager.UserCan('sas','device',AccessManager.EDIT),
+            canDelete:AccessManager.UserCan('sas','device',AccessManager.DELETE),
             displaySearchWindow:false,
             
+            devicetypeOptions:[],
+            ownerunitOptions:[],
         };
     };
     searchParams={};
     toggleSearchWindow = () => {
-        console.log("Toggling");
         this.setState({
             displaySearchWindow: !this.state.displaySearchWindow
         });
@@ -41,7 +42,7 @@ class contactus_subjectList extends SweetComponent {
     {
         let filterString=this.HttpGetParamsFromArray(filtered);
         if(filterString!='') filterString='&'+filterString;
-        let url='/contactus/subject?pg='+page+filterString;
+        let url='/sas/device?pg='+page+filterString;
         new SweetFetcher().Fetch(url, SweetFetcher.METHOD_GET, null, 
         data => {
             let Pages=Math.ceil(data.RecordCount/Constants.DefaultPageSize);
@@ -49,8 +50,23 @@ class contactus_subjectList extends SweetComponent {
                     data.Data[i]=Common.convertNullKeysToEmpty(data.Data[i]);
             this.setState({data: data.Data,pages:Pages})
         }, 
-        null,'contactus.subject',AccessManager.LIST,
+        null,'sas.device',AccessManager.LIST,
         this.props.history);
+        
+new SweetFetcher().Fetch('/sas/devicetype',SweetFetcher.METHOD_GET,null,
+                data=>{
+                let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
+                this.setState({devicetypeOptions:Options});
+            }, 
+            null,'sas.devicetype',AccessManager.LIST,
+            this.props.history);
+new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
+                data=>{
+                let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
+                this.setState({ownerunitOptions:Options});
+            }, 
+            null,'sas.unit',AccessManager.LIST,
+            this.props.history);
     };
     searchData=()=>
     {
@@ -65,7 +81,7 @@ class contactus_subjectList extends SweetComponent {
                 <MDBModal isOpen={this.state.displaySearchWindow} toggle={this.toggleSearchWindow}>
                     <MDBModalHeader toggle={this.toggleSearchWindow}>جستجو</MDBModalHeader>
                     <MDBModalBody>
-
+                        
                         <div className='form-group'>
                             <label htmlFor='name'>نام</label>
                             <input
@@ -74,6 +90,32 @@ class contactus_subjectList extends SweetComponent {
                                 type='text'
                                 onChange={(event)=>{this.searchParams.name=event.target.value;}}/>
                         </div>
+                    <div className='form-group'>
+                        <label htmlFor='devicetype'>نوع سخت افزار</label>
+                        <select 
+                                id='devicetype'
+                                className='browser-default custom-select'
+                                onChange={(event)=>{this.searchParams.devicetype=event.target.value;}}>
+                                <option value={''}>همه</option>
+                                {this.state.devicetypeOptions}
+                            </select>
+                            </div>
+                        <div className='form-group'>
+                            <label htmlFor='code'>شماره سریال</label>
+                            <input
+                                className='form-control'
+                                id='code'
+                                type='text'
+                                onChange={(event)=>{this.searchParams.code=event.target.value;}}/>
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='notete'>یادداشت</label>
+                            <input
+                                className='form-control'
+                                id='notete'
+                                type='text'
+                                onChange={(event)=>{this.searchParams.notete=event.target.value;}}/>
+                        </div>
                     </MDBModalBody>
                     <MDBModalFooter>
                         <MDBBtn color='secondary' onClick={this.toggleSearchWindow}>بستن</MDBBtn>
@@ -81,7 +123,7 @@ class contactus_subjectList extends SweetComponent {
                     </MDBModalFooter>
                 </MDBModal>
             </MDBContainer>
-            <div className={'topoperationsrow'}><Link className={'addlink'}  to={'/contactus/subjects/management'}><IoMdAddCircle/></Link></div>
+            <div className={'topoperationsrow'}><Link className={'addlink'}  to={'/sas/devices/management'}><IoMdAddCircle/></Link></div>
         <SweetTable
             filterable={false}
             className='-striped -highlight'
@@ -105,26 +147,38 @@ columns = [
     accessor: 'name'
 },
 {
+    Header: 'نوع سخت افزار',
+    accessor: 'devicetypecontent'
+},
+{
+    Header: 'شماره سریال',
+    accessor: 'code'
+},
+{
+    Header: 'بخش مالک',
+    accessor: 'ownerunitcontent'
+},
+{
     Header: 'عملیات',
     accessor: 'id',
     Cell: props => <div className={'operationsrow'}>
                    {!this.state.canEdit &&
-                    <Link className={'viewlink'}  to={'/contactus/subjects/management/'+props.value}><IoMdEye/></Link>
+                    <Link className={'viewlink'}  to={'/sas/devices/view/'+props.value}><IoMdEye/></Link>
                    }
                    {this.state.canEdit &&
-                    <Link className={'editlink'}  to={'/contactus/subjects/management/'+props.value}><FaEdit/></Link>
+                    <Link className={'editlink'}  to={'/sas/devices/management/'+props.value}><FaEdit/></Link>
                    }
                    {this.state.canDelete &&
                        <MdDeleteForever onClick={ 
                        () =>{
                          SweetAlert.displayDeleteAlert(()=>{
-                            new SweetFetcher().Fetch('/contactus/subject/' + props.value, SweetFetcher.METHOD_DELETE, null,
+                            new SweetFetcher().Fetch('/sas/device/' + props.value, SweetFetcher.METHOD_DELETE, null,
                                 data => {
                                     this.LoadData(Constants.DefaultPageSize,this.state.page+1,null,null);
                                 },(error)=>{
                                             let status=error.response.status;
                                             SweetAlert.displaySimpleAlert('خطای پیش بینی نشده ','خطایی در حذف اطلاعات به وجود آمد'+status.toString().trim());
-                                        },'contactus.subject',AccessManager.DELETE,this.props.history);
+                                        },'sas.device',AccessManager.DELETE,this.props.history);
                          });
                         }
                         }/>
@@ -132,4 +186,4 @@ columns = [
                 </div>,
 },];
         }
-export default contactus_subjectList;
+export default sas_deviceList;

@@ -15,7 +15,7 @@ class DefaultFooter extends Component {
 
     return (
       <React.Fragment>
-        <span> تمامی حقوق برای<a href="https://irib.ir">صدا و سیمای جمهوری اسلامی ایران</a>محفوظ می باشد. </span>
+        {/*<span> تمامی حقوق برای<a href="https://irib.ir">صدا و سیمای جمهوری اسلامی ایران</a>محفوظ می باشد. </span>*/}
       </React.Fragment>
     );
   }

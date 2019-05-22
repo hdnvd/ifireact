@@ -12,8 +12,11 @@ import Constants from '../../../../classes/Constants';
 import AccessManager from '../../../../classes/AccessManager';
 import Common from '../../../../classes/Common';
 import SweetComponent from '../../../../classes/sweet-component';
+import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
+import * as qs from 'query-string';
 
 class contactus_messageList extends SweetComponent {
+    searchParams={};
     constructor(props) {
         super(props);
         this.state = {
@@ -22,7 +25,41 @@ class contactus_messageList extends SweetComponent {
             page:0,
             canEdit:AccessManager.UserCan('contactus','message',AccessManager.EDIT),
             canDelete:AccessManager.UserCan('contactus','message',AccessManager.DELETE),
+            URLParameters: qs.parse(this.props.location.search),
+            modal:false,
+            messagereceiverOptions:[],
+            unitOptions:[],
+            subjectOptions:[],
+            degreeOptions:[],
+
         };
+        new SweetFetcher().Fetch('/contactus/subject', SweetFetcher.METHOD_GET, null,
+            subdata => {
+                let Options=subdata.Data.map(item=><option value={item.id}>{item.name}</option>);
+                this.setState({subjectOptions: Options});
+            },
+            null, 'contactus.subject', AccessManager.LIST,
+            this.props.history);
+        new SweetFetcher().Fetch('/contactus/unit', SweetFetcher.METHOD_GET, null,
+            subdata => {
+                let Options=subdata.Data.map(item=><option value={item.id}>{item.name}</option>);
+                this.setState({unitOptions: Options});
+            },
+            null, 'contactus.unit', AccessManager.LIST,
+            this.props.history);
+        new SweetFetcher().Fetch('/contactus/degree', SweetFetcher.METHOD_GET, null,
+            subdata => {
+                let Options=subdata.Data.map(item=><option value={item.id}>{item.name}</option>);
+                this.setState({degreeOptions: Options});
+            },
+            null, 'contactus.degree', AccessManager.LIST,
+            this.props.history);
+
+    };
+    toggleSearchWindow = () => {
+        this.setState({
+            modal: !this.state.modal
+        });
     };
     customFilter = ({ fieldName, filter, onChange }) => {
 
@@ -45,12 +82,14 @@ class contactus_messageList extends SweetComponent {
     componentDidMount() {
         this.LoadData(Constants.DefaultPageSize,1,null,null);
     }
+
     LoadData(pageSize,page,sorted,filtered)
     {
         let url='/contactus/message?answered='+this.getAnsweredState();
         let filterString=this.HttpGetParamsFromArray(filtered);
         if(filterString!='') filterString='&'+filterString;
         url=url+'&pg='+page+filterString;
+        console.log("URL:",url);
         new SweetFetcher().Fetch(url, SweetFetcher.METHOD_GET, null, 
         data => {
             let Pages=Math.ceil(data.RecordCount/Constants.DefaultPageSize);
@@ -61,8 +100,105 @@ class contactus_messageList extends SweetComponent {
         null,'contactus.message',AccessManager.LIST,
         this.props.history);
     };
+    searchData=()=>
+    {
+        this.toggleSearchWindow();
+        if(this.searchParams!=null)
+            this.LoadData(Constants.DefaultPageSize,1,null,Common.ObjectToIdValueArray(this.searchParams));
+    };
     render(){
+
         return <div className={'pagecontent'}>
+            <MDBContainer className={'searchcontainer'}>
+                <MDBBtn onClick={this.toggleSearchWindow}>جستجو</MDBBtn>
+                <MDBModal isOpen={this.state.modal} toggle={this.toggleSearchWindow}>
+                    <MDBModalHeader toggle={this.toggleSearchWindow}>جستجو</MDBModalHeader>
+                    <MDBModalBody>
+                        <div className='form-group'>
+                            <label htmlFor='orderserial'>کد رهگیری</label>
+                            <input
+                                className='form-control'
+                                id='orderserial'
+                                type='text'
+                                onChange={(event)=>{this.searchParams.orderserial=event.target.value;}}/>
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='questiontext'>متن سوال</label>
+                            <input
+                                className='form-control'
+                                id='questiontext'
+                                type='text'
+                                onChange={(event)=>{this.searchParams.questiontext=event.target.value;}}/>
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='sendername'>نام ارسال کننده</label>
+                            <input
+                                className='form-control'
+                                id='sendername'
+                                type='text'
+                                onChange={(event)=>{this.searchParams.sendername=event.target.value;}}/>
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='sendertel'>تلفن ارسال کننده</label>
+                            <input
+                                className='form-control'
+                                id='sendertel'
+                                type='text'
+                                onChange={(event)=>{this.searchParams.sendertel=event.target.value;}}/>
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='answertext'>متن پاسخ</label>
+                            <input
+                                className='form-control'
+                                id='answertext'
+                                type='text'
+                                onChange={(event)=>{this.searchParams.answertext=event.target.value;}}/>
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='unit'>یگان</label>
+                            <select
+                                id='unit'
+                                className='browser-default custom-select'
+                                onChange={(event)=>{this.searchParams.unit=event.target.value;}}>
+                                <option>همه</option>
+                                {this.state.unitOptions}
+                            </select>
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='personelno'>کد پرسنلی</label>
+                            <input
+                                className='form-control'
+                                id='personelno'
+                                type='text'
+                                onChange={(event)=>{this.searchParams.personelno=event.target.value;}}/>
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='subject'>موضوع</label>
+                            <select
+                                id='subject'
+                                className='browser-default custom-select'
+                                onChange={(event)=>{this.searchParams.subject=event.target.value;}}>
+                                <option>همه</option>
+                                {this.state.subjectOptions}
+                            </select>
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor='degree'>درجه</label>
+                            <select
+                                id='degree'
+                                className='browser-default custom-select'
+                                onChange={(event)=>{this.searchParams.degree=event.target.value;}}>
+                                <option>همه</option>
+                                {this.state.degreeOptions}
+                            </select>
+                        </div>
+                    </MDBModalBody>
+                    <MDBModalFooter>
+                        <MDBBtn color='secondary' onClick={this.toggleSearchWindow}>بستن</MDBBtn>
+                        <MDBBtn color='primary' onClick={this.searchData}>جستجو</MDBBtn>
+                    </MDBModalFooter>
+                </MDBModal>
+            </MDBContainer>
         <SweetTable
             filterable={false}
             className='-striped -highlight'
@@ -80,27 +216,27 @@ class contactus_messageList extends SweetComponent {
         </div>;
     }
 
-columns = [
-{
-    Header: 'کد رهگیری',
-    accessor: 'orderserial',
-    filterable:true,
-},
-{
-    Header: 'نام و نشان',
-    accessor: 'sendername',
-    filterable:true,
-},
-{
-    Header: 'تلفن تماس',
-    accessor: 'sendertel',
-    filterable:true,
-},
-{
-    Header: 'کد پرسنلی',
-    accessor: 'personelno',
-    filterable:true,
-},
+    columns = [
+        {
+            Header: 'کد رهگیری',
+            accessor: 'orderserial'
+        },
+        {
+            Header: 'نام و نشان',
+            accessor: 'sendername'
+        },
+        {
+            Header: 'یگان',
+            accessor: 'unitcontent'
+        },
+        {
+            Header: 'درجه',
+            accessor: 'degreecontent'
+        },
+        {
+            Header: 'موضوع',
+            accessor: 'subjectcontent'
+        },
 
     // {
     //     Header: 'یگان',
