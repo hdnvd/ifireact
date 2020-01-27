@@ -82,6 +82,9 @@ const routes = [
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
 ];
+
+const ChangePass = React.lazy(() => import('./modules/users/pages/password/users_changepass'));
+routes.push({ path: '/changepass',exact:true, name: 'تغییر رمز',component:ChangePass});
 const ifi_dfnList = React.lazy(() => import('./modules/ifi/pages/dfn/ifi_dfnList'));
 routes.push({ path: '/ifi/dfns',exact:true, name: 'لیست فیلدها',component:ifi_dfnList});
 const ifi_dfnManage = React.lazy(() => import('./modules/ifi/pages/dfn/ifi_dfnManage'));
@@ -177,6 +180,8 @@ routes.push({ path: '/sas/requests/view/:id',exact:false, name: 'درخواست'
 
 const sas_deviceList = React.lazy(() => import('./modules/sas/pages/device/sas_deviceList'));
 routes.push({ path: '/sas/devices',exact:true, name: 'لیست تجهیز',component:sas_deviceList});
+const sas_deviceListAll = React.lazy(() => import('./modules/sas/pages/device/sas_deviceListAll'));
+routes.push({ path: '/sas/devices/all',exact:true, name: 'لیست تجهیزات',component:sas_deviceListAll});
 const sas_deviceManage = React.lazy(() => import('./modules/sas/pages/device/sas_deviceManage'));
 const sas_deviceView = React.lazy(() => import('./modules/sas/pages/device/sas_deviceView'));
 routes.push({ path: '/sas/devices/management/:id',exact:false, name: 'ویرایش تجهیز',component:sas_deviceManage});
@@ -194,12 +199,12 @@ routes.push({ path: '/sas/devicetypes/view/:id',exact:false, name: 'نوع سخ�
 
 
 const sas_unitsequenceList = React.lazy(() => import('./modules/sas/pages/unitsequence/sas_unitsequenceList'));
-routes.push({ path: '/sas/unitsequences',exact:true, name: 'لیست unitsequence',component:sas_unitsequenceList});
+routes.push({ path: '/sas/unitsequences',exact:true, name: 'لیست توالی بخش ها',component:sas_unitsequenceList});
 const sas_unitsequenceManage = React.lazy(() => import('./modules/sas/pages/unitsequence/sas_unitsequenceManage'));
 const sas_unitsequenceView = React.lazy(() => import('./modules/sas/pages/unitsequence/sas_unitsequenceView'));
-routes.push({ path: '/sas/unitsequences/management/:id',exact:false, name: 'ویرایش unitsequence',component:sas_unitsequenceManage});
-routes.push({ path: '/sas/unitsequences/management',exact:false, name: 'تعریف unitsequence',component:sas_unitsequenceManage});
-routes.push({ path: '/sas/unitsequences/view/:id',exact:false, name: 'unitsequence',component:sas_unitsequenceView});
+routes.push({ path: '/sas/unitsequences/management/:id',exact:false, name: 'ویرایش توالی بخش ها',component:sas_unitsequenceManage});
+routes.push({ path: '/sas/unitsequences/management',exact:false, name: 'تعریف توالی بخش ها',component:sas_unitsequenceManage});
+routes.push({ path: '/sas/unitsequences/view/:id',exact:false, name: 'توالی بخش ها',component:sas_unitsequenceView});
 
 
 const sas_statusList = React.lazy(() => import('./modules/sas/pages/status/sas_statusList'));
@@ -250,11 +255,193 @@ routes.push({ path: '/sas/requestmessages/view/:id',exact:false, name: 'requestm
 
 const sas_unittypeList = React.lazy(() => import('./modules/sas/pages/unittype/sas_unittypeList'));
 const sas_Dashboard = React.lazy(() => import('./modules/sas/pages/request/sas_dashboard'));
-routes.push({ path: '/',exact:true, name: 'صفحه اصلی',component:sas_Dashboard});
+routes.push({ path: '/',exact:true, name: 'صفحه اصلی',component:null});
 routes.push({ path: '/sas/unittypes',exact:true, name: 'لیست نوع بخش',component:sas_unittypeList});
 const sas_unittypeManage = React.lazy(() => import('./modules/sas/pages/unittype/sas_unittypeManage'));
 const sas_unittypeView = React.lazy(() => import('./modules/sas/pages/unittype/sas_unittypeView'));
 routes.push({ path: '/sas/unittypes/management/:id',exact:false, name: 'ویرایش نوع بخش',component:sas_unittypeManage});
 routes.push({ path: '/sas/unittypes/management',exact:false, name: 'تعریف نوع بخش',component:sas_unittypeManage});
 routes.push({ path: '/sas/unittypes/view/:id',exact:false, name: 'نوع بخش',component:sas_unittypeView});
+
+const common_dateList = React.lazy(() => import('./modules/common/pages/date/common_dateList'));
+routes.push({ path: '/common/dates',exact:true, name: 'لیست روزهای تعطیل',component:common_dateList});
+const common_dateManage = React.lazy(() => import('./modules/common/pages/date/common_dateManage'));
+const common_dateView = React.lazy(() => import('./modules/common/pages/date/common_dateView'));
+routes.push({ path: '/common/dates/management/:id',exact:false, name: 'ویرایش روز تعطیل',component:common_dateManage});
+routes.push({ path: '/common/dates/management',exact:false, name: 'تعریف روز تعطیل',component:common_dateManage});
+routes.push({ path: '/common/dates/view/:id',exact:false, name: 'روز تعطیل',component:common_dateView});
+
+
+
+
+const trapp_villaownerList = React.lazy(() => import('./modules/trapp/pages/villaowner/trapp_villaownerList'));
+const trapp_villaownerBalances = React.lazy(() => import('./modules/trapp/pages/villaowner/trapp_villaownerBalances'));
+routes.push({ path: '/trapp/villaowners',exact:true, name: 'لیست villaowner',component:trapp_villaownerList});
+routes.push({ path: '/trapp/villaownerbalances',exact:true, name: 'فهرست پرداخت',component:trapp_villaownerBalances});
+const trapp_villaownerManage = React.lazy(() => import('./modules/trapp/pages/villaowner/trapp_villaownerManage'));
+const trapp_villaownerView = React.lazy(() => import('./modules/trapp/pages/villaowner/trapp_villaownerView'));
+routes.push({ path: '/trapp/villaowners/management/:id',exact:false, name: 'ویرایش villaowner',component:trapp_villaownerManage});
+routes.push({ path: '/trapp/villaowners/management',exact:false, name: 'تعریف villaowner',component:trapp_villaownerManage});
+routes.push({ path: '/trapp/villaowners/view/:id',exact:false, name: 'villaowner',component:trapp_villaownerView});
+
+
+const trapp_villaList = React.lazy(() => import('./modules/trapp/pages/villa/trapp_villaList'));
+const trapp_inactiveVillaList = React.lazy(() => import('./modules/trapp/pages/villa/trapp_inactiveVillaList'));
+routes.push({ path: '/trapp/villas',exact:true, name: 'لیست ویلاها',component:trapp_villaList});
+routes.push({ path: '/trapp/inactivevillas',exact:true, name: 'لیست ویلاها',component:trapp_inactiveVillaList});
+const trapp_villaManage = React.lazy(() => import('./modules/trapp/pages/villa/trapp_villaManage'));
+const trapp_villaView = React.lazy(() => import('./modules/trapp/pages/villa/trapp_villaView'));
+routes.push({ path: '/trapp/villas/management/:id',exact:false, name: 'ویرایش ویلا',component:trapp_villaManage});
+routes.push({ path: '/trapp/villas/management',exact:false, name: 'تعریف ویلا',component:trapp_villaManage});
+routes.push({ path: '/trapp/villas/view/:id',exact:false, name: 'ویلا',component:trapp_villaView});
+
+
+const placeman_placeList = React.lazy(() => import('./modules/placeman/pages/place/placeman_placeList'));
+routes.push({ path: '/placeman/places',exact:true, name: 'لیست مکان ها',component:placeman_placeList});
+const placeman_placeManage = React.lazy(() => import('./modules/placeman/pages/place/placeman_placeManage'));
+const placeman_placeView = React.lazy(() => import('./modules/placeman/pages/place/placeman_placeView'));
+routes.push({ path: '/placeman/places/management/:id',exact:false, name: 'ویرایش مکان',component:placeman_placeManage});
+routes.push({ path: '/placeman/places/management',exact:false, name: 'تعریف مکان',component:placeman_placeManage});
+routes.push({ path: '/placeman/places/view/:id',exact:false, name: 'مکان',component:placeman_placeView});
+
+
+const placeman_placephotoList = React.lazy(() => import('./modules/placeman/pages/placephoto/placeman_placephotoList'));
+routes.push({ path: '/placeman/placephotos/place/:placeid',exact:true, name: 'لیست تصاویر ویلا',component:placeman_placephotoList});
+const placeman_placephotoManage = React.lazy(() => import('./modules/placeman/pages/placephoto/placeman_placephotoManage'));
+const placeman_placephotoView = React.lazy(() => import('./modules/placeman/pages/placephoto/placeman_placephotoView'));
+routes.push({ path: '/placeman/placephotos/management/:id',exact:false, name: 'ویرایش تصاویر ویلا',component:placeman_placephotoManage});
+routes.push({ path: '/placeman/placephotos/management',exact:false, name: 'تعریف تصاویر ویلا',component:placeman_placephotoManage});
+routes.push({ path: '/placeman/placephotos/view/:id',exact:false, name: 'تصاویر ویلا',component:placeman_placephotoView});
+
+
+const placeman_phototypeList = React.lazy(() => import('./modules/placeman/pages/phototype/placeman_phototypeList'));
+routes.push({ path: '/placeman/phototypes',exact:true, name: 'لیست phototype',component:placeman_phototypeList});
+const placeman_phototypeManage = React.lazy(() => import('./modules/placeman/pages/phototype/placeman_phototypeManage'));
+const placeman_phototypeView = React.lazy(() => import('./modules/placeman/pages/phototype/placeman_phototypeView'));
+routes.push({ path: '/placeman/phototypes/management/:id',exact:false, name: 'ویرایش phototype',component:placeman_phototypeManage});
+routes.push({ path: '/placeman/phototypes/management',exact:false, name: 'تعریف phototype',component:placeman_phototypeManage});
+routes.push({ path: '/placeman/phototypes/view/:id',exact:false, name: 'phototype',component:placeman_phototypeView});
+
+
+const trapp_orderList = React.lazy(() => import('./modules/trapp/pages/order/trapp_orderList'));
+const trapp_incompleteorderList = React.lazy(() => import('./modules/trapp/pages/order/trapp_incompleteorderList'));
+routes.push({ path: '/trapp/orders',exact:true, name: 'سفارشات',component:trapp_orderList});
+routes.push({ path: '/trapp/incompleteorders',exact:true, name: 'سفارشات ناتمام',component:trapp_incompleteorderList});
+const trapp_orderManage = React.lazy(() => import('./modules/trapp/pages/order/trapp_orderManage'));
+const trapp_orderView = React.lazy(() => import('./modules/trapp/pages/order/trapp_orderView'));
+routes.push({ path: '/trapp/orders/management/:id',exact:false, name: 'ویرایش order',component:trapp_orderManage});
+routes.push({ path: '/trapp/orders/management',exact:false, name: 'تعریف order',component:trapp_orderManage});
+routes.push({ path: '/trapp/orders/view/:id',exact:false, name: 'order',component:trapp_orderView});
+
+
+const finance_transactionList = React.lazy(() => import('./modules/finance/pages/transaction/finance_transactionList'));
+routes.push({ path: '/finance/transactions',exact:true, name: 'لیست transaction',component:finance_transactionList});
+const finance_transactionManage = React.lazy(() => import('./modules/finance/pages/transaction/finance_transactionManage'));
+const finance_transactionView = React.lazy(() => import('./modules/finance/pages/transaction/finance_transactionView'));
+routes.push({ path: '/finance/transactions/management/:id',exact:false, name: 'ویرایش transaction',component:finance_transactionManage});
+routes.push({ path: '/finance/transactions/management',exact:false, name: 'تعریف transaction',component:finance_transactionManage});
+routes.push({ path: '/finance/transactions/view/:id',exact:false, name: 'transaction',component:finance_transactionView});
+
+
+const trapp_villaoptionList = React.lazy(() => import('./modules/trapp/pages/villaoption/trapp_villaoptionList'));
+routes.push({ path: '/trapp/villaoptions',exact:true, name: 'لیست villaoption',component:trapp_villaoptionList});
+const trapp_villaoptionManage = React.lazy(() => import('./modules/trapp/pages/villaoption/trapp_villaoptionManage'));
+const trapp_villaoptionView = React.lazy(() => import('./modules/trapp/pages/villaoption/trapp_villaoptionView'));
+routes.push({ path: '/trapp/villaoptions/management/:id',exact:false, name: 'ویرایش villaoption',component:trapp_villaoptionManage});
+routes.push({ path: '/trapp/villaoptions/management',exact:false, name: 'تعریف villaoption',component:trapp_villaoptionManage});
+routes.push({ path: '/trapp/villaoptions/view/:id',exact:false, name: 'villaoption',component:trapp_villaoptionView});
+
+
+
+
+
+
+/********************PlaceMan***********************/
+
+const placeman_provinceList = React.lazy(() => import('./modules/placeman/pages/province/placeman_provinceList'));
+routes.push({ path: '/placeman/provinces',exact:true, name: 'لیست استان',component:placeman_provinceList});
+const placeman_provinceManage = React.lazy(() => import('./modules/placeman/pages/province/placeman_provinceManage'));
+const placeman_provinceView = React.lazy(() => import('./modules/placeman/pages/province/placeman_provinceView'));
+routes.push({ path: '/placeman/provinces/management/:id',exact:false, name: 'ویرایش استان',component:placeman_provinceManage});
+routes.push({ path: '/placeman/provinces/management',exact:false, name: 'تعریف استان',component:placeman_provinceManage});
+routes.push({ path: '/placeman/provinces/view/:id',exact:false, name: 'استان',component:placeman_provinceView});
+
+
+const placeman_cityList = React.lazy(() => import('./modules/placeman/pages/city/placeman_cityList'));
+routes.push({ path: '/placeman/citys',exact:true, name: 'لیست شهر',component:placeman_cityList});
+const placeman_cityManage = React.lazy(() => import('./modules/placeman/pages/city/placeman_cityManage'));
+const placeman_cityView = React.lazy(() => import('./modules/placeman/pages/city/placeman_cityView'));
+routes.push({ path: '/placeman/citys/management/:id',exact:false, name: 'ویرایش شهر',component:placeman_cityManage});
+routes.push({ path: '/placeman/citys/management',exact:false, name: 'تعریف شهر',component:placeman_cityManage});
+routes.push({ path: '/placeman/citys/view/:id',exact:false, name: 'شهر',component:placeman_cityView});
+
+
+const placeman_areaList = React.lazy(() => import('./modules/placeman/pages/area/placeman_areaList'));
+routes.push({ path: '/placeman/areas',exact:true, name: 'لیست منطقه',component:placeman_areaList});
+const placeman_areaManage = React.lazy(() => import('./modules/placeman/pages/area/placeman_areaManage'));
+const placeman_areaView = React.lazy(() => import('./modules/placeman/pages/area/placeman_areaView'));
+routes.push({ path: '/placeman/areas/management/:id',exact:false, name: 'ویرایش منطقه',component:placeman_areaManage});
+routes.push({ path: '/placeman/areas/management',exact:false, name: 'تعریف منطقه',component:placeman_areaManage});
+routes.push({ path: '/placeman/areas/view/:id',exact:false, name: 'منطقه',component:placeman_areaView});
+
+/********************PlaceMan***********************/
+/********************PlaceMan***********************/
+
+
+const trapp_owningtypeList = React.lazy(() => import('./modules/trapp/pages/owningtype/trapp_owningtypeList'));
+routes.push({ path: '/trapp/owningtypes',exact:true, name: 'لیست نوع اقامتگاه',component:trapp_owningtypeList});
+const trapp_owningtypeManage = React.lazy(() => import('./modules/trapp/pages/owningtype/trapp_owningtypeManage'));
+const trapp_owningtypeView = React.lazy(() => import('./modules/trapp/pages/owningtype/trapp_owningtypeView'));
+routes.push({ path: '/trapp/owningtypes/management/:id',exact:false, name: 'ویرایش نوع اقامتگاه',component:trapp_owningtypeManage});
+routes.push({ path: '/trapp/owningtypes/management',exact:false, name: 'تعریف نوع اقامتگاه',component:trapp_owningtypeManage});
+routes.push({ path: '/trapp/owningtypes/view/:id',exact:false, name: 'نوع اقامتگاه',component:trapp_owningtypeView});
+
+
+const trapp_areatypeList = React.lazy(() => import('./modules/trapp/pages/areatype/trapp_areatypeList'));
+routes.push({ path: '/trapp/areatypes',exact:true, name: 'لیست بافت',component:trapp_areatypeList});
+const trapp_areatypeManage = React.lazy(() => import('./modules/trapp/pages/areatype/trapp_areatypeManage'));
+const trapp_areatypeView = React.lazy(() => import('./modules/trapp/pages/areatype/trapp_areatypeView'));
+routes.push({ path: '/trapp/areatypes/management/:id',exact:false, name: 'ویرایش بافت',component:trapp_areatypeManage});
+routes.push({ path: '/trapp/areatypes/management',exact:false, name: 'تعریف بافت',component:trapp_areatypeManage});
+routes.push({ path: '/trapp/areatypes/view/:id',exact:false, name: 'بافت',component:trapp_areatypeView});
+
+
+const trapp_viewtypeList = React.lazy(() => import('./modules/trapp/pages/viewtype/trapp_viewtypeList'));
+routes.push({ path: '/trapp/viewtypes',exact:true, name: 'لیست چشم انداز',component:trapp_viewtypeList});
+const trapp_viewtypeManage = React.lazy(() => import('./modules/trapp/pages/viewtype/trapp_viewtypeManage'));
+const trapp_viewtypeView = React.lazy(() => import('./modules/trapp/pages/viewtype/trapp_viewtypeView'));
+routes.push({ path: '/trapp/viewtypes/management/:id',exact:false, name: 'ویرایش چشم انداز',component:trapp_viewtypeManage});
+routes.push({ path: '/trapp/viewtypes/management',exact:false, name: 'تعریف چشم انداز',component:trapp_viewtypeManage});
+routes.push({ path: '/trapp/viewtypes/view/:id',exact:false, name: 'چشم انداز',component:trapp_viewtypeView});
+
+
+const trapp_structuretypeList = React.lazy(() => import('./modules/trapp/pages/structuretype/trapp_structuretypeList'));
+routes.push({ path: '/trapp/structuretypes',exact:true, name: 'لیست نوع ساختمان',component:trapp_structuretypeList});
+const trapp_structuretypeManage = React.lazy(() => import('./modules/trapp/pages/structuretype/trapp_structuretypeManage'));
+const trapp_structuretypeView = React.lazy(() => import('./modules/trapp/pages/structuretype/trapp_structuretypeView'));
+routes.push({ path: '/trapp/structuretypes/management/:id',exact:false, name: 'ویرایش نوع ساختمان',component:trapp_structuretypeManage});
+routes.push({ path: '/trapp/structuretypes/management',exact:false, name: 'تعریف نوع ساختمان',component:trapp_structuretypeManage});
+routes.push({ path: '/trapp/structuretypes/view/:id',exact:false, name: 'نوع ساختمان',component:trapp_structuretypeView});
+
+const trapp_optionList = React.lazy(() => import('./modules/trapp/pages/option/trapp_optionList'));
+routes.push({ path: '/trapp/options',exact:true, name: 'لیست امکانات ویلا',component:trapp_optionList});
+const trapp_optionManage = React.lazy(() => import('./modules/trapp/pages/option/trapp_optionManage'));
+const trapp_optionView = React.lazy(() => import('./modules/trapp/pages/option/trapp_optionView'));
+routes.push({ path: '/trapp/options/management/:id',exact:false, name: 'ویرایش امکانات ویلا',component:trapp_optionManage});
+routes.push({ path: '/trapp/options/management',exact:false, name: 'تعریف امکانات ویلا',component:trapp_optionManage});
+routes.push({ path: '/trapp/options/view/:id',exact:false, name: 'امکانات ویلا',component:trapp_optionView});
+
+/********************PlaceMan***********************/
+
+
+
+const comments_commentList = React.lazy(() => import('./modules/comments/pages/comment/comments_commentList'));
+routes.push({ path: '/comments/comments',exact:true, name: 'لیست نظر',component:comments_commentList});
+const comments_commentManage = React.lazy(() => import('./modules/comments/pages/comment/comments_commentManage'));
+const comments_commentView = React.lazy(() => import('./modules/comments/pages/comment/comments_commentView'));
+routes.push({ path: '/comments/comments/management/:id',exact:false, name: 'ویرایش نظر',component:comments_commentManage});
+routes.push({ path: '/comments/comments/management',exact:false, name: 'تعریف نظر',component:comments_commentManage});
+routes.push({ path: '/comments/comments/view/:id',exact:false, name: 'نظر',component:comments_commentView});
+
+
 export default routes;

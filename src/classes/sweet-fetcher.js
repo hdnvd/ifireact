@@ -40,8 +40,8 @@ class SweetFetcher {
             Prefix='Bearer ';
 
         let cookies = new Cookies();
-        console.log(cookies.get('userdisplayname'));
-        console.log(cookies.get('sessionkey'));
+        // console.log(cookies.get('userdisplayname'));
+        // console.log(cookies.get('sessionkey'));
         let ax=axios.create({
             baseURL: Constants.SiteURL+"/api",
             headers: {
@@ -49,8 +49,8 @@ class SweetFetcher {
                 Authorization: Prefix+this.cookies.get('sessionkey'),
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            mode: 'cors',
-            crossDomain:true,
+            // mode: 'cors',
+            // crossDomain:true,
         });
         if(Method===SweetFetcher.METHOD_GET)
         {
@@ -70,6 +70,7 @@ class SweetFetcher {
         }
         Fetched.then(response => {
                 try {
+                    console.log("URL:"+URL);
                     console.log(response);
                 }catch (e) {
 

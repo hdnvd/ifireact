@@ -17,7 +17,7 @@ class sas_deviceView extends SweetComponent {
         super(props);
         this.state = {
                 canEdit:AccessManager.UserCan('sas','device',AccessManager.EDIT),
-            
+
 			name:'',
 			devicetype:'',
 			devicetypeOptions:[],
@@ -27,22 +27,22 @@ class sas_deviceView extends SweetComponent {
 			ownerunitOptions:[],
         };
         if(this.props.match.params.id>0){
-        new SweetFetcher().Fetch('/sas/device/'+this.props.match.params.id, SweetFetcher.METHOD_GET,null, 
+        new SweetFetcher().Fetch('/sas/device/'+this.props.match.params.id, SweetFetcher.METHOD_GET,null,
         data => {
             data.Data=Common.convertNullKeysToEmpty(data.Data);
-            
-                 this.setState({ 
+
+                 this.setState({
 name:data.Data.name,
 devicetype:data.Data.devicetypeinfo.name,
 code:data.Data.code,
 notete:data.Data.notete,
 ownerunit:data.Data.ownerunitinfo.name,});
-        
-            }, 
+
+            },
             null,'sas.device',AccessManager.VIEW,
             this.props.history);
         }//IF
-        
+
     }
     render(){
         return <MDBContainer>
@@ -50,7 +50,7 @@ ownerunit:data.Data.ownerunitinfo.name,});
                 <MDBCol md='6'>
                     <form>
                         <p className='h5 text-center mb-4'> device</p>
-                        
+
                         <div className='form-group'>
                             <label>نام</label>
                             <label
@@ -82,14 +82,14 @@ ownerunit:data.Data.ownerunitinfo.name,});
                                 className='valuelabel'>
                                 {this.state.ownerunit}
                             </label>
-                        </div>    
-                            <div className='text-center'>
-                            <MDBBtn onClick={() =>
-                             {
-                                this.props.history.push('/sas/devices');
-                             }
-                            }>برگشت</MDBBtn>
                         </div>
+                        {/*    <div className='text-center'>*/}
+                        {/*    <MDBBtn onClick={() =>*/}
+                        {/*     {*/}
+                        {/*        this.props.history.push('/sas/devices');*/}
+                        {/*     }*/}
+                        {/*    }>برگشت</MDBBtn>*/}
+                        {/*</div>*/}
                     </form>
                 </MDBCol>
             </MDBRow>

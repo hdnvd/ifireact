@@ -37,11 +37,11 @@ class DefaultLayout extends Component {
         };
         let cookies = new Cookies();
         cookies.addChangeListener((name,value,options)=>{
-             alert(name.name);
-            if(name.name=='userlogintime')
-            {
-                alert("userlogintimeOK");
-            }
+             // alert(name.name);
+            // if(name.name=='userlogintime')
+            // {
+            //     alert("userlogintimeOK");
+            // }
         });
         // cookies.set("userlogintime",'11');
     };

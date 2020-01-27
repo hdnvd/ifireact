@@ -31,13 +31,14 @@ class sas_requestList extends SweetComponent {
             canEdit:AccessManager.UserCan('sas','request',AccessManager.EDIT),
             canDelete:AccessManager.UserCan('sas','request',AccessManager.DELETE),
             displaySearchWindow:false,
-            
+
             requesttypeOptions:[],
             deviceOptions:[],
             statusOptions:[],
             senderunitOptions:[],
             currentunitOptions:[],
             senderuserOptions:[],
+            recordCount:0,
         };
     };
     searchParams={};
@@ -77,44 +78,44 @@ class sas_requestList extends SweetComponent {
             let Pages=Math.ceil(data.RecordCount/Constants.DefaultPageSize);
             for(let i=0;i<data.Data.length;i++)
                     data.Data[i]=Common.convertNullKeysToEmpty(data.Data[i]);
-            this.setState({data: data.Data,pages:Pages})
-        }, 
+            this.setState({data: data.Data,recordCount:data.RecordCount,pages:Pages})
+        },
         null,'sas.request',AccessManager.LIST,
         this.props.history);
-        
+
 new SweetFetcher().Fetch('/sas/requesttype',SweetFetcher.METHOD_GET,null,
                 data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({requesttypeOptions:Options});
-            }, 
+            },
             null,'sas.requesttype',AccessManager.LIST,
             this.props.history);
 new SweetFetcher().Fetch('/sas/device',SweetFetcher.METHOD_GET,null,
                 data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({deviceOptions:Options});
-            }, 
+            },
             null,'sas.device',AccessManager.LIST,
             this.props.history);
 new SweetFetcher().Fetch('/sas/status',SweetFetcher.METHOD_GET,null,
                 data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({statusOptions:Options});
-            }, 
+            },
             null,'sas.status',AccessManager.LIST,
             this.props.history);
 new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
                 data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({senderunitOptions:Options});
-            }, 
+            },
             null,'sas.unit',AccessManager.LIST,
             this.props.history);
 new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
                 data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({currentunitOptions:Options});
-            }, 
+            },
             null,'sas.unit',AccessManager.LIST,
             this.props.history);
         new SweetFetcher().Fetch('/sas/request/approve?__onlycount=1',SweetFetcher.METHOD_GET,null,
@@ -143,10 +144,10 @@ new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
                 <MDBModal isOpen={this.state.displaySearchWindow} toggle={this.toggleSearchWindow}>
                     <MDBModalHeader toggle={this.toggleSearchWindow}>جستجو</MDBModalHeader>
                     <MDBModalBody>
-                        
+
                     <div className='form-group'>
                         <label htmlFor='requesttype'>نوع درخواست</label>
-                        <select 
+                        <select
                                 id='requesttype'
                                 className='browser-default custom-select'
                                 onChange={(event)=>{this.searchParams.requesttype=event.target.value;}}>
@@ -155,34 +156,8 @@ new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
                             </select>
                             </div>
                     <div className='form-group'>
-                        <label htmlFor='device'>تجهیز</label>
-                        <select 
-                                id='device'
-                                className='browser-default custom-select'
-                                onChange={(event)=>{this.searchParams.device=event.target.value;}}>
-                                <option value={''}>همه</option>
-                                {this.state.deviceOptions}
-                            </select>
-                            </div>
-                        <div className='form-group'>
-                            <label htmlFor='descriptionte'>توضیحات</label>
-                            <input
-                                className='form-control'
-                                id='descriptionte'
-                                type='text'
-                                onChange={(event)=>{this.searchParams.descriptionte=event.target.value;}}/>
-                        </div>
-                        <div className='form-group'>
-                            <label htmlFor='priority'>اولویت</label>
-                            <input
-                                className='form-control'
-                                id='priority'
-                                type='text'
-                                onChange={(event)=>{this.searchParams.priority=event.target.value;}}/>
-                        </div>
-                    <div className='form-group'>
                         <label htmlFor='status'>وضعیت</label>
-                        <select 
+                        <select
                                 id='status'
                                 className='browser-default custom-select'
                                 onChange={(event)=>{this.searchParams.status=event.target.value;}}>
@@ -190,50 +165,43 @@ new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
                                 {this.state.statusOptions}
                             </select>
                             </div>
-                    <div className='form-group'>
-                        <label htmlFor='senderunit'>بخش ارسال کننده</label>
-                        <select 
+                        {this.getboxtype() == sas_requestList.BOXTYPE_ADMINBOX &&
+                            <div>
+
+                                {/*<div className='form-group'>*/}
+                                {/*    <label htmlFor='priority'>اولویت</label>*/}
+                                {/*    <input*/}
+                                {/*        className='form-control'*/}
+                                {/*        id='priority'*/}
+                                {/*        type='text'*/}
+                                {/*        onChange={(event)=>{this.searchParams.priority=event.target.value;}}/>*/}
+                                {/*</div>*/}
+                        <div className='form-group'>
+                            <label htmlFor='senderunit'>بخش ارسال کننده</label>
+                            <select
                                 id='senderunit'
                                 className='browser-default custom-select'
-                                onChange={(event)=>{this.searchParams.senderunit=event.target.value;}}>
+                                onChange={(event) => {
+                                    this.searchParams.senderunit = event.target.value;
+                                }}>
                                 <option value={''}>همه</option>
                                 {this.state.senderunitOptions}
                             </select>
-                            </div>
-                    <div className='form-group'>
-                        <label htmlFor='currentunit'>بخش فعلی</label>
-                        <select 
-                                id='currentunit'
-                                className='browser-default custom-select'
-                                onChange={(event)=>{this.searchParams.currentunit=event.target.value;}}>
-                                <option value={''}>همه</option>
-                                {this.state.currentunitOptions}
+                        </div>
+                        < div className='form-group'>
+                            <label htmlFor='currentunit'>بخش فعلی</label>
+                            <select
+                            id='currentunit'
+                            className='browser-default custom-select'
+                            onChange={(event) => {
+                            this.searchParams.currentunit = event.target.value;
+                        }}>
+                            <option value={''}>همه</option>
+                            {this.state.currentunitOptions}
                             </select>
                             </div>
-                        <div className='form-group'>
-                            <label htmlFor='adminacceptancetime'>زمان تایید مدیر</label>
-                            <input
-                                className='form-control'
-                                id='adminacceptancetime'
-                                type='text'
-                                onChange={(event)=>{this.searchParams.adminacceptancetime=event.target.value;}}/>
-                        </div>
-                        <div className='form-group'>
-                            <label htmlFor='securityacceptancetime'>زمان تایید حفاظت</label>
-                            <input
-                                className='form-control'
-                                id='securityacceptancetime'
-                                type='text'
-                                onChange={(event)=>{this.searchParams.securityacceptancetime=event.target.value;}}/>
-                        </div>
-                        <div className='form-group'>
-                            <label htmlFor='fullsendtime'>زمان ارسال نهایی</label>
-                            <input
-                                className='form-control'
-                                id='fullsendtime'
-                                type='text'
-                                onChange={(event)=>{this.searchParams.fullsendtime=event.target.value;}}/>
-                        </div>
+                            </div>
+                        }
                         <div className='form-group'>
                             <label htmlFor='letternumber'>شماره نامه</label>
                             <input
@@ -242,24 +210,7 @@ new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
                                 type='text'
                                 onChange={(event)=>{this.searchParams.letternumber=event.target.value;}}/>
                         </div>
-                        <div className='form-group'>
-                            <label htmlFor='letterdate'>تاریخ نامه</label>
-                            <input
-                                className='form-control'
-                                id='letterdate'
-                                type='text'
-                                onChange={(event)=>{this.searchParams.letterdate=event.target.value;}}/>
-                        </div>
-                    <div className='form-group'>
-                        <label htmlFor='senderuser'>کاربر ارسال کننده</label>
-                        <select 
-                                id='senderuser'
-                                className='browser-default custom-select'
-                                onChange={(event)=>{this.searchParams.senderuser=event.target.value;}}>
-                                <option value={''}>همه</option>
-                                {this.state.senderuserOptions}
-                            </select>
-                            </div>
+
                     </MDBModalBody>
                     <MDBModalFooter>
                         <MDBBtn color='secondary' onClick={this.toggleSearchWindow}>بستن</MDBBtn>
@@ -267,7 +218,7 @@ new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
                     </MDBModalFooter>
                 </MDBModal>
             </MDBContainer>
-            <div className={'topoperationsrow'}><Link className={'addlink'}  to={'/sas/requests/management'}><IoMdAddCircle/></Link></div>
+
         <SweetTable
             filterable={false}
             className='-striped -highlight'
@@ -282,6 +233,7 @@ new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
                 this.LoadData(state.pageSize,state.page+1,state.sorted,state.filtered);
             }}
         />
+        <div>تعداد کل نتایج:{this.state.recordCount}</div>
         </div>;
     }
 
@@ -310,18 +262,18 @@ columns = [
     Header: 'بخش فعلی',
     accessor: 'currentunitcontent'
 },
-{
-    Header: 'زمان تایید مدیر',
-    accessor: 'adminacceptancetime'
-},
-{
-    Header: 'زمان تایید حفاظت',
-    accessor: 'securityacceptancetime'
-},
-{
-    Header: 'زمان ارسال نهایی',
-    accessor: 'fullsendtime'
-},
+// {
+//     Header: 'زمان تایید مدیر',
+//     accessor: 'adminacceptancetime'
+// },
+// {
+//     Header: 'زمان تایید حفاظت',
+//     accessor: 'securityacceptancetime'
+// },
+// {
+//     Header: 'زمان ارسال نهایی',
+//     accessor: 'fullsendtime'
+// },
 {
     Header: 'شماره نامه',
     accessor: 'letternumber'
@@ -346,7 +298,7 @@ columns = [
                     <Link className={'editlink'}  to={'/sas/requests/management/'+props.value}><FaEdit/></Link>
                    }
                    {this.state.canDelete &&
-                       <MdDeleteForever onClick={ 
+                       <MdDeleteForever onClick={
                        () =>{
                          SweetAlert.displayDeleteAlert(()=>{
                             new SweetFetcher().Fetch('/sas/request/' + props.value, SweetFetcher.METHOD_DELETE, null,

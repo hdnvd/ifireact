@@ -35,7 +35,7 @@ class Common{
         while (n--) {
             key = keys[n];
             let content=obj[key];
-            if(content==null || content=="null" || (content.length>0 && content.trim()=='null'))
+            if(content==null || content==="null" || ((typeof(content)==='string' || typeof(content)==='number') && content.length>0 && content.trim()==='null'))
                 newobj[key] = '';
             else
                 newobj[key] = content;

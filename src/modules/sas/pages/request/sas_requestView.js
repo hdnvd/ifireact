@@ -562,12 +562,12 @@ class sas_requestView extends SweetComponent {
                                 {this.state.letterdate}
                             </label>
                         </div>
-                        <div className='text-center'>
-                            <MDBBtn onClick={() => {
-                                this.props.history.push('/sas/outbox');
-                            }
-                            }>برگشت</MDBBtn>
-                        </div>
+                        {/*<div className='text-center'>*/}
+                        {/*    <MDBBtn onClick={() => {*/}
+                        {/*        this.props.history.push('/sas/outbox');*/}
+                        {/*    }*/}
+                        {/*    }>برگشت</MDBBtn>*/}
+                        {/*</div>*/}
                     </form>
                 </MDBCol>
 

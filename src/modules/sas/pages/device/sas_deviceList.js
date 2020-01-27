@@ -24,9 +24,10 @@ class sas_deviceList extends SweetComponent {
             canEdit:AccessManager.UserCan('sas','device',AccessManager.EDIT),
             canDelete:AccessManager.UserCan('sas','device',AccessManager.DELETE),
             displaySearchWindow:false,
-            
+
             devicetypeOptions:[],
             ownerunitOptions:[],
+            recordCount:0,
         };
     };
     searchParams={};
@@ -42,29 +43,31 @@ class sas_deviceList extends SweetComponent {
     {
         let filterString=this.HttpGetParamsFromArray(filtered);
         if(filterString!='') filterString='&'+filterString;
-        let url='/sas/device?pg='+page+filterString;
-        new SweetFetcher().Fetch(url, SweetFetcher.METHOD_GET, null, 
+
+        let RecordStart=((page-1)*pageSize);
+        let url='/sas/device?_startrow='+RecordStart+'&_pagesize='+pageSize+filterString;
+        new SweetFetcher().Fetch(url, SweetFetcher.METHOD_GET, null,
         data => {
             let Pages=Math.ceil(data.RecordCount/Constants.DefaultPageSize);
             for(let i=0;i<data.Data.length;i++)
                     data.Data[i]=Common.convertNullKeysToEmpty(data.Data[i]);
-            this.setState({data: data.Data,pages:Pages})
-        }, 
+            this.setState({data: data.Data,recordCount:data.RecordCount,pages:Pages})
+        },
         null,'sas.device',AccessManager.LIST,
         this.props.history);
-        
+
 new SweetFetcher().Fetch('/sas/devicetype',SweetFetcher.METHOD_GET,null,
                 data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({devicetypeOptions:Options});
-            }, 
+            },
             null,'sas.devicetype',AccessManager.LIST,
             this.props.history);
 new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
                 data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({ownerunitOptions:Options});
-            }, 
+            },
             null,'sas.unit',AccessManager.LIST,
             this.props.history);
     };
@@ -81,7 +84,7 @@ new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
                 <MDBModal isOpen={this.state.displaySearchWindow} toggle={this.toggleSearchWindow}>
                     <MDBModalHeader toggle={this.toggleSearchWindow}>جستجو</MDBModalHeader>
                     <MDBModalBody>
-                        
+
                         <div className='form-group'>
                             <label htmlFor='name'>نام</label>
                             <input
@@ -92,7 +95,7 @@ new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
                         </div>
                     <div className='form-group'>
                         <label htmlFor='devicetype'>نوع سخت افزار</label>
-                        <select 
+                        <select
                                 id='devicetype'
                                 className='browser-default custom-select'
                                 onChange={(event)=>{this.searchParams.devicetype=event.target.value;}}>
@@ -138,6 +141,7 @@ new SweetFetcher().Fetch('/sas/unit',SweetFetcher.METHOD_GET,null,
                 this.LoadData(state.pageSize,state.page+1,state.sorted,state.filtered);
             }}
         />
+            <div>تعداد کل نتایج:{this.state.recordCount}</div>
         </div>;
     }
 
@@ -169,7 +173,7 @@ columns = [
                     <Link className={'editlink'}  to={'/sas/devices/management/'+props.value}><FaEdit/></Link>
                    }
                    {this.state.canDelete &&
-                       <MdDeleteForever onClick={ 
+                       <MdDeleteForever onClick={
                        () =>{
                          SweetAlert.displayDeleteAlert(()=>{
                             new SweetFetcher().Fetch('/sas/device/' + props.value, SweetFetcher.METHOD_DELETE, null,

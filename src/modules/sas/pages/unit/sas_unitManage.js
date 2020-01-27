@@ -21,7 +21,7 @@ class sas_unitManage extends SweetComponent {
         super(props);
         this.state = {
                 canEdit:AccessManager.UserCan('sas','unit',this.props.match.params.id>0?AccessManager.EDIT:AccessManager.INSERT),
-            
+
 			name:'',
 			logoigu:'',
 			logoiguPreview:'',
@@ -36,21 +36,21 @@ class sas_unitManage extends SweetComponent {
 			securityuserOptions:[],
         };
         if(this.props.match.params.id>0){
-        new SweetFetcher().Fetch('/sas/unit/'+this.props.match.params.id, SweetFetcher.METHOD_GET,null, 
+        new SweetFetcher().Fetch('/sas/unit/'+this.props.match.params.id, SweetFetcher.METHOD_GET,null,
         data => {
             data.Data=Common.convertNullKeysToEmpty(data.Data);
-            
+
                  this.setState({ name:data.Data.name,logoiguPreview:Constants.SiteURL+'/'+data.Data.logoigu,logoigu:data.Data.logoigu,unittype:data.Data.unittype,needsadminapproval:data.Data.needsadminapproval,useruser:data.Data.useruser,adminuser:data.Data.adminuser,securityuser:data.Data.securityuser,});
-            }, 
+            },
             null,'sas.unit',AccessManager.VIEW,
             this.props.history);
         }//IF
-        
+
 new SweetFetcher().Fetch('/sas/unittype',SweetFetcher.METHOD_GET,null,
                 data=>{
                 let Options=data.Data.map(item=><option value={item.id}>{item.name}</option>);
                 this.setState({unittypeOptions:Options});
-            }, 
+            },
             null,'sas.unittype',AccessManager.LIST,
             this.props.history);
     }
@@ -58,12 +58,33 @@ new SweetFetcher().Fetch('/sas/unittype',SweetFetcher.METHOD_GET,null,
         toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList'],
     };
     render(){
+        let onResetPass=(usertype)=>{return (afterFetchListener) => {
+            const data = new FormData();
+            let method=SweetFetcher.METHOD_PUT;
+            let action='resetpassword';
+            data.append('id', this.props.match.params.id);
+            data.append('usertype', usertype);
+            new SweetFetcher().Fetch('/sas/unit/resetpassword/'+this.props.match.params.id,method,data,
+                res => {
+                    SweetAlert.displaySimpleAlert('پیام',res.message);
+                    //console.log(res);
+                },(error)=>{
+                    let status=error.response.status;
+                    afterFetchListener();
+                    SweetAlert.displaySimpleAlert('خطای پیش بینی نشده','خطایی در ذخیره اطلاعات به وجود آمد'+status.toString().trim());
+
+                },
+                'sas.unit',action,
+                this.props.history);
+
+        }
+        };
         return <MDBContainer>
             <MDBRow>
                 <MDBCol md='6'>
                     <form>
                         <p className='h5 text-center mb-4'>تعریف بخش</p>
-                        
+
                         <div className='form-group'>
                             <label htmlFor='name'>نام</label>
                             <input
@@ -102,10 +123,10 @@ new SweetFetcher().Fetch('/sas/unittype',SweetFetcher.METHOD_GET,null,
                             className={'imageuploadpreview'} />
                         }
                         </div>
-                            
+
                     <div className='form-group'>
                         <label htmlFor='unittype'>نوع بخش</label>
-                        <select 
+                        <select
                                 id='unittype'
                                 className='browser-default custom-select'
                                 value={this.state.unittype}
@@ -117,7 +138,7 @@ new SweetFetcher().Fetch('/sas/unittype',SweetFetcher.METHOD_GET,null,
                             </div>
                          <div className='form-group'>
                             <FormInline>
-                            
+
                            <label>نیاز به تایید مدیر</label>
                                     <Input
                                         onClick={() => this.setState({needsadminapproval : 0})}
@@ -138,7 +159,7 @@ new SweetFetcher().Fetch('/sas/unittype',SweetFetcher.METHOD_GET,null,
                                 </FormInline>
                         </div>
                             <div className='text-center'>
-                            {this.state.canEdit && 
+                            {this.state.canEdit &&
                                 <SweetButton value={'ذخیره'}
                                     onButtonPress={(afterFetchListener) => {
                                 let id = '';
@@ -148,7 +169,7 @@ new SweetFetcher().Fetch('/sas/unittype',SweetFetcher.METHOD_GET,null,
                                     if (this.props.match.params.id > 0)
                                         id = this.props.match.params.id;
                                     const data = new FormData();
-                                    
+
 									data.append('name', this.state.name);
 									data.append('logoigu', this.state.logoigu);
 									data.append('unittype', this.state.unittype);
@@ -159,7 +180,7 @@ new SweetFetcher().Fetch('/sas/unittype',SweetFetcher.METHOD_GET,null,
 									action=AccessManager.EDIT;
 										data.append('id', id);
 								}
-                                    new SweetFetcher().Fetch('/sas/unit'+Separator+id,method,data, 
+                                    new SweetFetcher().Fetch('/sas/unit'+Separator+id,method,data,
                                     res => {
                                                 return this.props.history.push('/sas/units');
                                                 //console.log(res);
@@ -171,7 +192,7 @@ new SweetFetcher().Fetch('/sas/unittype',SweetFetcher.METHOD_GET,null,
                                         },
                                         'sas.unit',action,
                                         this.props.history);
-                                    
+
                                 }
                                 }
                                 />
@@ -181,6 +202,22 @@ new SweetFetcher().Fetch('/sas/unittype',SweetFetcher.METHOD_GET,null,
                                 this.props.history.push('/sas/units');
                              }
                             }>برگشت</MDBBtn>
+                                {this.props.match.params.id>0 &&
+                                    <div>
+                                    <SweetButton value={'پاک کردن رمز کاربر'}
+                                    onButtonPress={onResetPass(1)}
+
+                                    />
+                                    <SweetButton value={'پاک کردن رمز مدیر'}
+                                    onButtonPress={onResetPass(2)}
+
+                                    />
+                                    <SweetButton value={'پاک کردن رمز حفاظت'}
+                                    onButtonPress={onResetPass(3)}
+
+                                    />
+                                    </div>
+                                }
                         </div>
                     </form>
                 </MDBCol>

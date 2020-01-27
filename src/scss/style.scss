@@ -76,7 +76,12 @@ This set of fonts are used in this project under the license: (.....)
   url('fonts/woff/IRANSansWeb.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
   url('fonts/ttf/IRANSansWeb.ttf') format('truetype');
 }
+.checkedrow{
+  width: 20px;
+  float: right;
+  height: 20px;
 
+}
 body
 {
   font-family: IRANSans;
@@ -288,4 +293,7 @@ direction: rtl;
   background: #fff;
   border-radius: 10px;
   margin-bottom: 10px;
+}
+a.link{
+  font-size: 0.60em;
 }

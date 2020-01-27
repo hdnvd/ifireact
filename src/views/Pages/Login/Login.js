@@ -27,8 +27,8 @@ class Login extends Component {
         super(props);
         this.state = {
 
-            username: '',
-            password: '',
+            username: 'admin@trapp.app',
+            password: '098887655',
         };
         // let cookies = new Cookies();
         // cookies.set('sessionkey', '');
@@ -74,7 +74,8 @@ class Login extends Component {
                                                 </InputGroupAddon>
                                                 <Input type="text" placeholder="نام کاربری" onChange={(e) => {
                                                     this.setState({'username': e.target.value})
-                                                }} autoComplete="username"/>
+                                                }} autoComplete="username"
+                                                       value={this.state.username}/>
                                             </InputGroup>
                                             <InputGroup className="mb-4">
                                                 <InputGroupAddon addonType="prepend">
@@ -84,7 +85,8 @@ class Login extends Component {
                                                 </InputGroupAddon>
                                                 <Input type="password" placeholder="کلمه عبور" onChange={(e) => {
                                                     this.setState({'password': e.target.value})
-                                                }} autoComplete="current-password"/>
+                                                }} autoComplete="current-password"
+                                                value={this.state.password}/>
                                             </InputGroup>
                                             <Row>
                                                 <Col xs="6">
@@ -139,8 +141,9 @@ class Login extends Component {
                                         <div>
                                             {/*<img src={Logo} />*/}
                                             {/*<h2>سامانه ارتباط با کارکنان عقیدتی و سیاسی قرارگاه خاتم الانبیاء</h2>*/}
-                                            <h2>سامانه اتوماسیون خدمات فاوایی قرارگاه خاتم الانبیاء</h2>
-                                            <p>ویرایش 98/1</p>
+                                            {/*<h2>سامانه اتوماسیون خدمات فاوایی قرارگاه خاتم الانبیاء</h2>*/}
+                                            <h2>سامانه مدیریت Trapp</h2>
+                                            <p>ویرایش 98/10</p>
                                         </div>
                                     </CardBody>
                                 </Card>
