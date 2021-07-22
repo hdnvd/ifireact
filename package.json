@@ -77,7 +77,7 @@
     "tenacious-fetch": "^2.1.0",
     "tinymce": "^5.0.1",
     "universal-cookie": "^3.0.7",
-    "xlsx": "^0.14.1"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
