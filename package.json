@@ -43,7 +43,7 @@
     "miio": "git+https://github.com/LukaszLapaj/miio.git#master",
     "moment-jalaali": "^0.8.3",
     "moment-jalali": "^0.3.9",
-    "node-sass": "^4.10.0",
+    "node-sass": "^7.0.0",
     "npm": "^6.10.3",
     "prop-types": "^15.6.2",
     "query-string": "^6.2.0",
